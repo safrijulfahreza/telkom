@@ -23,8 +23,8 @@
                             <th scope="row"><?= $i; ?></th>
                             <td><?= $m['menu']; ?></td>
                             <td>
-                                <a href="" class="badge badge-success">edit</a>
-                                <a href="" class="badge badge-danger">delete</a>
+                                <a href="" class="badge badge-success" data-toggle="modal" data-target="#editMenuModal">edit</a>
+                                <a href="<?= base_url(); ?>menu/hapus/<?= $m['id']; ?>" class="badge badge-danger">delete</a>
                             </td>
                         </tr>
                         <?php $i++; ?>

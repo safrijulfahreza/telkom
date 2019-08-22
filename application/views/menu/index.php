@@ -19,15 +19,15 @@
                 <tbody>
                     <?php $i = 1; ?>
                     <?php foreach ($menu as $m) : ?>
-                        <tr>
-                            <th scope="row"><?= $i; ?></th>
-                            <td><?= $m['menu']; ?></td>
-                            <td>
-                                <a href="" class="badge badge-success" data-toggle="modal" data-target="#editMenuModal">edit</a>
-                                <a href="<?= base_url(); ?>menu/hapus/<?= $m['id']; ?>" class="badge badge-danger">delete</a>
-                            </td>
-                        </tr>
-                        <?php $i++; ?>
+                    <tr>
+                        <th scope="row"><?= $i; ?></th>
+                        <td><?= $m['menu']; ?></td>
+                        <td>
+                            <a href="<?= base_url(); ?>menu/edit/<?= $m['id']; ?>" class="badge badge-success" data-toggle="modal" data-target="#editMenuModal" data-id="<?= $m['id'] ?>">edit</a>
+                            <a href="<?= base_url(); ?>menu/delete/<?= $m['id']; ?>" class="badge badge-danger">delete</a>
+                        </td>
+                    </tr>
+                    <?php $i++; ?>
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -58,6 +58,30 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editMenuModal" tabindex="-1" role="dialog" aria-labelledby="editMenuModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editMenuModalLabel">Edit Menu</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?= base_url('menu/edit'); ?>" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="edit_menu" name="edit_menu" placeholder="Edit menu name">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </form>
         </div>

@@ -25,10 +25,10 @@
 
        <!-- LOOPING MENU -->
        <?php foreach ($menu as $m) : ?>
-           <div class="sidebar-heading">
-               <?= $m['menu']; ?>
-           </div>
-           <?php
+       <div class="sidebar-heading">
+           <?= $m['menu']; ?>
+       </div>
+       <?php
             $menuId = $m['id'];
             $querySubMenu = "SELECT *
                             FROM `user_sub_menu` JOIN `user_menu`
@@ -38,18 +38,18 @@
            ";
             $subMenu = $this->db->query($querySubMenu)->result_array();
             ?>
-           <?php foreach ($subMenu as $sm) : ?>
-               <?php if ($title == $sm['title']) : ?>
-                   <li class="nav-item active">
-                   <?php else : ?>
-                   <li class="nav-item">
-                   <?php endif; ?>
-                   <a class="nav-link" href="<?= base_url($sm['url']); ?>">
-                       <i class="<?= $sm['icon']; ?>"></i>
-                       <span><?= $sm['title']; ?></span></a>
-               </li>
-           <?php endforeach; ?>
-           <hr class="sidebar-divider">
+       <?php foreach ($subMenu as $sm) : ?>
+       <?php if ($title == $sm['title']) : ?>
+       <li class="nav-item active">
+           <?php else : ?>
+       <li class="nav-item">
+           <?php endif; ?>
+           <a class="nav-link pb-0" href="<?= base_url($sm['url']); ?>">
+               <i class="<?= $sm['icon']; ?>"></i>
+               <span><?= $sm['title']; ?></span></a>
+       </li>
+       <?php endforeach; ?>
+       <hr class="sidebar-divider mt-3">
        <?php endforeach; ?>
        <li class="nav-item">
            <a class="nav-link" href="<?= base_url('auth/logout'); ?>">

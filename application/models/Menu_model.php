@@ -11,4 +11,17 @@ class Menu_model extends CI_Model
                 ";
         return $this->db->query($query)->result_array();
     }
+
+    public function editMenu($data)
+    {
+        $query = "UPDATE user_menu SET
+                        menu = :menu
+                        WHERE id = :id
+                    ";
+        $this->db->query($query);
+        $this->db->bind('menu', $data['menu']);
+
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
 }

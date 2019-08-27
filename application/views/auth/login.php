@@ -26,16 +26,12 @@
                                     </div>
                                     <div class="form-group">
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                                    <button type="submit" class="btn btn-secondary btn-user btn-block">
                                         Login
                                     </button>
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                </div>
-                                <div class="text-center">
-                                    <a class="small" href="<?= base_url("auth/regristration") ?>">Create an Account!</a>
                                 </div>
                             </div>
                         </div>

@@ -60,7 +60,7 @@ class Input extends CI_Controller
 
     public function table()
     {
-        $data['title'] = 'Table';
+        $data['title'] = 'Report Status Ticket';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['input'] = $this->db->get('input')->result_array();
         $data['perbaikan'] = $this->db->get('perbaikan')->result_array();
@@ -124,5 +124,17 @@ class Input extends CI_Controller
         $this->load->view('templates/topbar', $data);
         $this->load->view('input/grafik', $data);
         $this->load->view('templates/footer', $data);
+    }
+
+    public function tech()
+    {
+        $data['title'] = 'Report Technician';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('input/tech', $data);
+        $this->load->view('templates/footer');
     }
 }

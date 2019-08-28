@@ -16,7 +16,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Data Table</h6>
                 </div>
                 <div class="card-body">
-                    <div class="table-rensponsive">
+                    <div class="table-responsive">
                         <table class="table table-sm table-hover" id="table">
                             <thead>
                                 <tr>
@@ -31,12 +31,14 @@
                                     <th scope="col">STO</th>
 
                                     <th scope="col">Keterangan</th>
+                                    <th scope="col">Tanggal Input</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $i = 1; ?>
                                 <?php foreach ($input as $in) : ?>
+                                <?php if ($user['name'] == $in['helpdesk']) : ?>
                                 <tr>
                                     <th scope="row"><?= $i; ?></th>
                                     <td><?= $in['nomor_tiket'] ?></td>
@@ -48,11 +50,13 @@
                                     <td><?= $in['helpdesk'] ?></td>
                                     <td><?= $in['sto'] ?></td>
                                     <td><?= $in['keterangan'] ?></td>
+                                    <td><?= substr($in['tgl_input'], -26, -16); ?></td>
                                     <td>
                                         <a href="<?= base_url(); ?>input/table/<?= $in['id']; ?>" data-id="<?= $i; ?>" class="badge badge-primary" data-toggle="modal" data-target="#detail<?php echo $in['nomor_tiket']; ?>">Detail</a>
                                         <a href="<?= base_url(); ?>input/hapus/<?= $in['id']; ?>" class="badge badge-danger">Delete</a>
                                     </td>
                                 </tr>
+                                <?php endif ?>
                                 <?php $i++; ?>
                                 <?php endforeach; ?>
                             </tbody>

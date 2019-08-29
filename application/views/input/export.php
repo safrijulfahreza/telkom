@@ -49,35 +49,35 @@ header("Expires: 0");
         <?php $i = 1;
         foreach ($data as $data) { ?>
 
-        <tr>
+            <tr>
 
-            <td><?php echo $i ?></td>
+                <td><?php echo $i ?></td>
 
-            <td><?php echo $data['nomor_tiket'] ?></td>
-            <td><?php echo $data['status'] ?></td>
-            <td><?php echo $data['layanan'] ?></td>
-            <td><?php echo $data['segmen'] ?></td>
-            <td><?php echo $data['teknisi1'] ?></td>
-            <td><?php echo $data['teknisi2'] ?></td>
-            <td><?php echo $data['helpdesk'] ?></td>
-            <td><?php echo $data['sto'] ?></td>
-            <td><?php echo $data['alpro'] ?></td>
-            <td><?php echo $data['perbaikan'] ?></td>
-            <td><?php echo $data['keterangan'] ?></td>
-            <td><?php echo substr($data['tgl_input'], -26, -16) ?></td>
-            <td><?php echo substr($data['tgl_input'], -26, -16) ?></td>
-            <td><?php echo $data['sleeve'] ?></td>
-            <td><?php echo $data['adaptor'] ?></td>
-            <td><?php echo $data['precon50'] ?></td>
-            <td><?php echo $data['precon75'] ?></td>
-            <td><?php echo $data['precon100'] ?></td>
-            <td><?php echo $data['precon150'] ?></td>
-            <td><?php echo $data['ps1:4'] ?></td>
-            <td><?php echo $data['ps1:8'] ?></td>
-            <td><?php echo $data['pigtail'] ?></td>
+                <td><?php echo $data['nomor_tiket'] ?></td>
+                <td><?php echo $data['status'] ?></td>
+                <td><?php echo $data['layanan'] ?></td>
+                <td><?php echo $data['segmen'] ?></td>
+                <td><?php echo $data['teknisi1'] ?></td>
+                <td><?php echo $data['teknisi2'] ?></td>
+                <td><?php echo $data['helpdesk'] ?></td>
+                <td><?php echo $data['sto'] ?></td>
+                <td><?php echo $data['alpro'] ?></td>
+                <td><?php echo $data['perbaikan'] ?></td>
+                <td><?php echo $data['keterangan'] ?></td>
+                <td><?php echo substr($data['tgl_input'], -19, -9) ?></td>
+                <td><?php echo substr($data['tgl_input'], -19, -9) ?></td>
+                <td><?php echo $data['sleeve'] ?></td>
+                <td><?php echo $data['adaptor'] ?></td>
+                <td><?php echo $data['precon50'] ?></td>
+                <td><?php echo $data['precon75'] ?></td>
+                <td><?php echo $data['precon100'] ?></td>
+                <td><?php echo $data['precon150'] ?></td>
+                <td><?php echo $data['ps1:4'] ?></td>
+                <td><?php echo $data['ps1:8'] ?></td>
+                <td><?php echo $data['pigtail'] ?></td>
 
 
-        </tr>
+            </tr>
 
         <?php $i++;
         } ?>

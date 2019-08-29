@@ -6,9 +6,9 @@
     <div class="row">
         <div class="col-lg">
             <?php if (validation_errors()) : ?>
-            <div class="alert alert-danger" role="alert">
-                <?= validation_errors(); ?>
-            </div>
+                <div class="alert alert-danger" role="alert">
+                    <?= validation_errors(); ?>
+                </div>
             <?php endif; ?>
             <?= $this->session->flashdata('message'); ?>
 
@@ -25,6 +25,7 @@
                                     <th scope="col">Nama Helpdesk</th>
                                     <th scope="col">NIK</th>
                                     <th scope="col">Tanggal Terdaftar</th>
+                                    <th scope="col">Role</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -32,22 +33,27 @@
                             <tbody>
                                 <?php $i = 1; ?>
                                 <?php foreach ($regis as $r) : ?>
-                                <tr>
-                                    <th scope="row"><?= $i; ?></th>
-                                    <td><?= $r['name']; ?></td>
-                                    <td><?= $r['email']; ?></td>
-                                    <td><?= date('d F Y', $r['date_created']); ?></td>
-                                    <?php if ($r['is_active'] == 1) : ?>
-                                    <td>Aktif</td>
-                                    <?php else : ?>
-                                    <td>Nonaktif</td>
-                                    <?php endif ?>
-                                    <td>
-                                        <a href="<?= base_url(); ?>admin/registrasi/<?= $r['id']; ?>" data-id="<?= $i; ?>" class="badge badge-primary" data-toggle="modal" data-target="#update<?php echo $r['email']; ?>">Update</a>
-                                        <a href="<?= base_url(); ?>admin/hapushelpdesk/<?= $r['id']; ?>" class="badge badge-danger">Delete</a>
-                                    </td>
-                                </tr>
-                                <?php $i++; ?>
+                                    <tr>
+                                        <th scope="row"><?= $i; ?></th>
+                                        <td><?= $r['name']; ?></td>
+                                        <td><?= $r['email']; ?></td>
+                                        <td><?= date('d F Y', $r['date_created']); ?></td>
+                                        <?php if ($r['role_id'] == 1) : ?>
+                                            <td>Admin</td>
+                                        <?php else : ?>
+                                            <td>Helpdesk</td>
+                                        <?php endif; ?>
+                                        <?php if ($r['is_active'] == 1) : ?>
+                                            <td>Aktif</td>
+                                        <?php else : ?>
+                                            <td>Nonaktif</td>
+                                        <?php endif ?>
+                                        <td>
+                                            <a href="<?= base_url(); ?>admin/registrasi/<?= $r['id']; ?>" data-id="<?= $i; ?>" class="badge badge-primary" data-toggle="modal" data-target="#update<?php echo $r['email']; ?>">Update</a>
+                                            <a href="<?= base_url(); ?>admin/hapushelpdesk/<?= $r['id']; ?>" class="badge badge-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                    <?php $i++; ?>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
@@ -117,45 +123,58 @@ foreach ($regis as $regis) :
     $name = $regis['name'];
     $email = $regis['email'];
     $status = $regis['is_active'];
+    $role = $regis['role_id'];
     ?>
-<div class="modal fade" id="update<?php echo $email; ?>" tabindex="-1" role="dialog" aria-labelledby="updateLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="updateLabel">Edit Helpdesk</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+    <div class="modal fade" id="update<?php echo $email; ?>" tabindex="-1" role="dialog" aria-labelledby="updateLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateLabel">Edit Helpdesk</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="<?= base_url('admin/updateuser'); ?>" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="control-label col-xs-3">Nama Helpdesk</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Nama Helpdesk" value="<?= $name ?>">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3">NIK</label>
+                            <input type="number" class="form-control" id="nik" name="nik" placeholder="NIK" value="<?= $email ?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3">Status</label>
+                            <select name="status" id="status" class="form-control">
+                                <?php if ($status == 1) : ?>
+                                    <option value="1" selected>Aktif</option>
+                                    <option value="0">Nonaktif</option>
+                                <?php else : ?>
+                                    <option value="1">Aktif</option>
+                                    <option value="0" selected>Nonaktif</option>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3">Role</label>
+                            <select name="role" id="role" class="form-control">
+                                <?php if ($role == 1) : ?>
+                                    <option value="1" selected>Admin</option>
+                                    <option value="2">Helpdesk</option>
+                                <?php else : ?>
+                                    <option value="1">Admin</option>
+                                    <option value="2" selected>Helpdesk</option>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Update</button>
+                    </div>
+                </form>
             </div>
-            <form action="<?= base_url('admin/updateuser'); ?>" method="post">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label class="control-label col-xs-3">Nama Helpdesk</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Nama Helpdesk" value="<?= $name ?>">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-xs-3">NIK</label>
-                        <input type="number" class="form-control" id="nik" name="nik" placeholder="NIK" value="<?= $email ?>" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-xs-3">Status</label>
-                        <select name="status" id="status" class="form-control">
-                            <?php if ($status == 1) : ?>
-                            <option value="1" selected>Aktif</option>
-                            <option value="0">Nonaktif</option>
-                            <?php else : ?>
-                            <option value="1">Aktif</option>
-                            <option value="0" selected>Nonaktif</option>
-                            <?php endif; ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success">Update</button>
-                </div>
-            </form>
         </div>
     </div>
-</div>
 <?php endforeach; ?>

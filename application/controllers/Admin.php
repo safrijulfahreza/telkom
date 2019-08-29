@@ -185,7 +185,8 @@ class Admin extends CI_Controller
     {
         $data = [
             'name' => $this->input->post('name'),
-            'is_active' => $this->input->post('status')
+            'is_active' => $this->input->post('status'),
+            'role_id' => $this->input->post('role')
         ];
         $this->db->set($data);
         $this->db->where('email', $this->input->post('nik'));

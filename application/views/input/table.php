@@ -37,8 +37,8 @@
                             </thead>
                             <tbody>
                                 <?php $i = 1; ?>
-                                <?php foreach ($input as $in) : ?>
-                                    <?php if ($user['name'] == $in['helpdesk']) : ?>
+                                <?php if ($user['role_id'] == 1) : ?>
+                                    <?php foreach ($input as $in) : ?>
                                         <tr>
                                             <th scope="row"><?= $i; ?></th>
                                             <td><?= $in['nomor_tiket'] ?></td>
@@ -56,9 +56,33 @@
                                                 <a href="<?= base_url(); ?>input/hapus/<?= $in['id']; ?>" class="badge badge-danger">Delete</a>
                                             </td>
                                         </tr>
-                                    <?php endif ?>
-                                    <?php $i++; ?>
-                                <?php endforeach; ?>
+                                        <?php $i++; ?>
+                                    <?php endforeach; ?>
+                                <?php else : ?>
+
+                                    <?php foreach ($input as $in) : ?>
+                                        <?php if ($user['name'] == $in['helpdesk']) : ?>
+                                            <tr>
+                                                <th scope="row"><?= $i; ?></th>
+                                                <td><?= $in['nomor_tiket'] ?></td>
+                                                <td><?= $in['status'] ?></td>
+                                                <td><?= $in['layanan'] ?></td>
+                                                <td><?= $in['segmen'] ?></td>
+                                                <td><?= $in['teknisi1'] ?></td>
+                                                <td><?= $in['teknisi2'] ?></td>
+                                                <td><?= $in['helpdesk'] ?></td>
+                                                <td><?= $in['sto'] ?></td>
+                                                <td><?= $in['keterangan'] ?></td>
+                                                <td><?= substr($in['tgl_input'], -19, -9); ?></td>
+                                                <td>
+                                                    <a href="<?= base_url(); ?>input/table/<?= $in['id']; ?>" data-id="<?= $i; ?>" class="badge badge-primary" data-toggle="modal" data-target="#detail<?php echo $in['nomor_tiket']; ?>">Detail</a>
+                                                    <a href="<?= base_url(); ?>input/hapus/<?= $in['id']; ?>" class="badge badge-danger">Delete</a>
+                                                </td>
+                                            </tr>
+                                            <?php $i++; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>

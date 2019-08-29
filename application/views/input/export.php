@@ -65,7 +65,7 @@ header("Expires: 0");
                 <td><?php echo $data['perbaikan'] ?></td>
                 <td><?php echo $data['keterangan'] ?></td>
                 <td><?php echo substr($data['tgl_input'], -19, -9) ?></td>
-                <td><?php echo substr($data['tgl_input'], -19, -9) ?></td>
+                <td><?php echo substr($data['tgl_update'], -19, -9) ?></td>
                 <td><?php echo $data['sleeve'] ?></td>
                 <td><?php echo $data['adaptor'] ?></td>
                 <td><?php echo $data['precon50'] ?></td>

@@ -3,15 +3,16 @@
 
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
     <a href="" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#tambahHelpdesk">Tambah Helpdesk</a>
+    <?php if (validation_errors()) : ?>
+        <div class="alert alert-danger" role="alert">
+            <?= validation_errors(); ?>
+        </div>
+    <?php endif; ?>
     <div class="row">
         <div class="col-lg">
-            <?php if (validation_errors()) : ?>
-                <div class="alert alert-danger" role="alert">
-                    <?= validation_errors(); ?>
-                </div>
-            <?php endif; ?>
-            <?= $this->session->flashdata('message'); ?>
+            <?= form_error('menu', '<div class="alert alert-danger" role="alert">', '</div>') ?>
 
+            <?= $this->session->flashdata('message'); ?>
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-secondary">List Helpdesk</h6>
@@ -32,24 +33,27 @@
                             </thead>
                             <tbody>
                                 <?php $i = 1; ?>
+                                <!-- looping table -->
                                 <?php foreach ($regis as $r) : ?>
                                     <tr>
                                         <th scope="row"><?= $i; ?></th>
                                         <td><?= $r['name']; ?></td>
-                                        <td><?= $r['email']; ?></td>
+                                        <td><?= $r['nik']; ?></td>
                                         <td><?= date('d F Y', $r['date_created']); ?></td>
-                                        <?php if ($r['role_id'] == 1) : ?>
-                                            <td>Admin</td>
-                                        <?php else : ?>
-                                            <td>Helpdesk</td>
-                                        <?php endif; ?>
+                                        <!-- looping kolom role -->
+                                        <?php foreach ($role_name as $rn) : ?>
+                                            <?php if ($r['role_id'] == $rn['id']) : ?>
+                                                <td><?= $rn['role']; ?></td>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+
                                         <?php if ($r['is_active'] == 1) : ?>
                                             <td>Aktif</td>
                                         <?php else : ?>
                                             <td>Nonaktif</td>
                                         <?php endif ?>
                                         <td>
-                                            <a href="<?= base_url(); ?>admin/registrasi/<?= $r['id']; ?>" data-id="<?= $i; ?>" class="badge badge-primary" data-toggle="modal" data-target="#update<?php echo $r['email']; ?>">Update</a>
+                                            <a href="<?= base_url(); ?>admin/registrasi/<?= $r['id']; ?>" data-id="<?= $i; ?>" class="badge badge-primary" data-toggle="modal" data-target="#update<?php echo $r['nik']; ?>">Update</a>
                                             <a href="<?= base_url(); ?>admin/hapushelpdesk/<?= $r['id']; ?>" class="badge badge-danger">Delete</a>
                                         </td>
                                     </tr>
@@ -67,7 +71,7 @@
 <!-- /.container-fluid -->
 
 </div>
-<!-- End of Main Content -->
+<!-- Modal Input -->
 <div class="modal fade" id="tambahHelpdesk" tabindex="-1" role="dialog" aria-labelledby="tambahHelpdeskLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -121,11 +125,11 @@
 <?php
 foreach ($regis as $regis) :
     $name = $regis['name'];
-    $email = $regis['email'];
+    $nik = $regis['nik'];
     $status = $regis['is_active'];
     $role = $regis['role_id'];
-    ?>
-    <div class="modal fade" id="update<?php echo $email; ?>" tabindex="-1" role="dialog" aria-labelledby="updateLabel" aria-hidden="true">
+?>
+    <div class="modal fade" id="update<?php echo $nik; ?>" tabindex="-1" role="dialog" aria-labelledby="updateLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -142,7 +146,7 @@ foreach ($regis as $regis) :
                         </div>
                         <div class="form-group">
                             <label class="control-label col-xs-3">NIK</label>
-                            <input type="number" class="form-control" id="nik" name="nik" placeholder="NIK" value="<?= $email ?>" readonly>
+                            <input type="number" class="form-control" id="nik" name="nik" placeholder="NIK" value="<?= $nik ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-xs-3">Status</label>
@@ -159,13 +163,13 @@ foreach ($regis as $regis) :
                         <div class="form-group">
                             <label class="control-label col-xs-3">Role</label>
                             <select name="role" id="role" class="form-control">
-                                <?php if ($role == 1) : ?>
-                                    <option value="1" selected>Admin</option>
-                                    <option value="2">Helpdesk</option>
-                                <?php else : ?>
-                                    <option value="1">Admin</option>
-                                    <option value="2" selected>Helpdesk</option>
-                                <?php endif; ?>
+                                <?php foreach ($role_name as $rn) : ?>
+                                    <?php if ($role == $rn['id']) : ?>
+                                        <option value="<?= $rn['id']; ?>" selected><?= $rn['role']; ?></option>
+                                    <?php else : ?>
+                                        <option value="<?= $rn['id']; ?>"><?= $rn['role']; ?></option>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>

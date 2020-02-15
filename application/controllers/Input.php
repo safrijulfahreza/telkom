@@ -12,7 +12,7 @@ class Input extends CI_Controller
     public function index()
     {
         $data['title'] = 'Input';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['user'] = $this->db->get_where('user', ['nik' => $this->session->userdata('nik')])->row_array();
 
         $data['teknisi'] = $this->db->get('teknisi')->result_array();
         $data['perbaikan'] = $this->db->get('perbaikan')->result_array();
@@ -29,7 +29,6 @@ class Input extends CI_Controller
         $this->form_validation->set_rules('teknisi2', 'Teknisi 2', 'required');
         $this->form_validation->set_rules('sto', 'STO', 'required');
         $this->form_validation->set_rules('alpro', 'Alpro', 'required');
-        $this->form_validation->set_rules('subsegmen', 'Sub Segementasi Perbaikan', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -61,16 +60,61 @@ class Input extends CI_Controller
     public function table()
     {
         $data['title'] = 'Report Status Ticket';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['input'] = $this->db->get('input')->result_array();
+        $data['user'] = $this->db->get_where('user', ['nik' => $this->session->userdata('nik')])->row_array();
         $data['perbaikan'] = $this->db->get('perbaikan')->result_array();
         $data['sto'] = $this->db->get('sto')->result_array();
+        $data['teknisi'] = $this->db->get('teknisi')->result_array();
+        $data['helpdeskk'] = $this->db->get('user')->result_array();
 
+        $this->db->select('name');
+        $data['hd'] = $this->db->get('user')->result_array();
 
+        $f_sto = $this->input->post('f_sto');
+        $f_help = $this->input->post('f_helpdesk');
+        $f_segmen = $this->input->post('f_segmen');
+
+        // var_dump($f_sto);
+        // die;
+
+        // $data['input'] = $this->db->get_where('input', ['sto' => $f_sto, 'helpdesk' => $f_help, 'segmen' => $f_segmen])->result_array();
+        // $this->load->view('templates/header', $data);
+        // $this->load->view('templates/sidebar', $data);
+        // $this->load->view('templates/topbar', $data);
+        // $this->load->view('input/table', $data);
+        // $this->load->view('templates/footer');
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('input/table', $data);
+        // filtering
+        if ($f_sto != "" && $f_help != "" && $f_segmen != "") {
+            $data['input'] = $this->db->get_where('input', ['sto' => $f_sto, 'helpdesk' => $f_help, 'segmen' => $f_segmen])->result_array();
+            $this->load->view('input/table', $data);
+            if (isset($_POST['filter'])) {
+                $data['input'] = $this->db->get_where('input', ['sto' => $f_sto, 'helpdesk' => $f_help, 'segmen' => $f_segmen])->result_array();
+                $this->load->view('input/export', $data);
+            }
+        } elseif ($f_sto != "" && $f_help != "") {
+            $data['input'] = $this->db->get_where('input', ['sto' => $f_sto, 'helpdesk' => $f_help])->result_array();
+            $this->load->view('input/table', $data);
+        } elseif ($f_help != "" && $f_segmen != "") {
+            $data['input'] = $this->db->get_where('input', ['helpdesk' => $f_help, 'segmen' => $f_segmen])->result_array();
+            $this->load->view('input/table', $data);
+        } elseif ($f_sto != "" && $f_segmen != "") {
+            $data['input'] = $this->db->get_where('input', ['sto' => $f_sto, 'segmen' => $f_segmen])->result_array();
+            $this->load->view('input/table', $data);
+        } elseif ($f_sto != "") {
+            $data['input'] = $this->db->get_where('input', ['sto' => $f_sto])->result_array();
+            $this->load->view('input/table', $data);
+        } elseif ($f_help != "") {
+            $data['input'] = $this->db->get_where('input', ['helpdesk' => $f_help])->result_array();
+            $this->load->view('input/table', $data);
+        } elseif ($f_segmen) {
+            $data['input'] = $this->db->get_where('input', ['segmen' => $f_segmen])->result_array();
+            $this->load->view('input/table', $data);
+        } else {
+            $data['input'] = $this->db->get('input')->result_array();
+            $this->load->view('input/table', $data);
+        }
         $this->load->view('templates/footer');
     }
 
@@ -78,6 +122,9 @@ class Input extends CI_Controller
     {
         $data = [
             'status' => $this->input->post('status'),
+            'teknisi1' => $this->input->post('teknisi1'),
+            'teknisi2' => $this->input->post('teknisi2'),
+            'helpdesk' => $this->input->post('hd'),
             'perbaikan' => $this->input->post('subsegmen'),
             'keterangan' => $this->input->post('keterangan'),
             'sleeve' => $this->input->post('sleeve'),
@@ -94,6 +141,8 @@ class Input extends CI_Controller
         $this->db->set('tgl_update', 'NOW()', FALSE);
         $this->db->where('nomor_tiket', $this->input->post('nomor'));
         $this->db->update('input');
+
+        // $this->db->query('UPDATE input SET durasi = timediff(tgl_update, tgl_input) WHERE status = \'CLOSE\'');
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data di update!</div>');
         redirect('input/table');
@@ -116,7 +165,7 @@ class Input extends CI_Controller
     public function grafik()
     {
         $data['title'] = 'Grafik';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['user'] = $this->db->get_where('user', ['nik' => $this->session->userdata('nik')])->row_array();
         $data['input'] = $this->db->get('input')->result_array();
 
         $this->load->view('templates/header', $data);
@@ -129,7 +178,7 @@ class Input extends CI_Controller
     public function tech()
     {
         $data['title'] = 'Report Technician';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['user'] = $this->db->get_where('user', ['nik' => $this->session->userdata('nik')])->row_array();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);

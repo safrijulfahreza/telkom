@@ -11,10 +11,10 @@ class Auth extends CI_Controller
 
     public function index()
     {
-        if ($this->session->userdata('email')) {
+        if ($this->session->userdata('nik')) {
             redirect('user');
         }
-        $this->form_validation->set_rules('email', 'Email', 'trim|required');
+        $this->form_validation->set_rules('nik', 'NIK', 'trim|required');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Login Page';
@@ -29,9 +29,9 @@ class Auth extends CI_Controller
 
     private function _login()
     {
-        $email = $this->input->post('email');
+        $nik = $this->input->post('nik');
         $password = $this->input->post('password');
-        $user = $this->db->get_where('user', ['email' => $email])->row_array();
+        $user = $this->db->get_where('user', ['nik' => $nik])->row_array();
         //jika user ada
         if ($user) {
             //jika user aktif
@@ -39,9 +39,11 @@ class Auth extends CI_Controller
                 //cek password
                 if (password_verify($password, $user['password'])) {
                     $data = [
-                        'email' => $user['email'],
+                        'nik' => $user['nik'],
                         'role_id' => $user['role_id']
                     ];
+                    // var_dump($data);
+                    // die;
                     $this->session->set_userdata($data);
                     if ($user['role_id'] == 1) {
                         redirect('user');
@@ -68,8 +70,8 @@ class Auth extends CI_Controller
     //         redirect('user');
     //     }
     //     $this->form_validation->set_rules('name', 'Name', 'required|trim');
-    //     $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
-    //         'is_unique' => 'This email has already registered!'
+    //     $this->form_validation->set_rules('nik', 'nik', 'required|trim|valid_nik|is_unique[user.nik]', [
+    //         'is_unique' => 'This nik has already registered!'
     //     ]);
     //     $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
     //         'matches' => 'Password dont match!',
@@ -84,7 +86,7 @@ class Auth extends CI_Controller
     //     } else {
     //         $data = [
     //             'name' => htmlspecialchars($this->input->post('name', true)),
-    //             'email' => htmlspecialchars($this->input->post('email', true)),
+    //             'nik' => htmlspecialchars($this->input->post('nik', true)),
     //             'image' => 'default.jpg',
     //             'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
     //             'role_id' => 2,
@@ -99,7 +101,7 @@ class Auth extends CI_Controller
 
     public function logout()
     {
-        $this->session->unset_userdata('email');
+        $this->session->unset_userdata('nik');
         $this->session->unset_userdata('role_id');
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You have been logged out</div>');

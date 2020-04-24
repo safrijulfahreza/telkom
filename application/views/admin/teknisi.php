@@ -2,13 +2,13 @@
 <div class="container-fluid">
 
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
-    <a href="" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#tambahTeknisi">Tambah Teknisi</a>
+    <!-- <a href="" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#tambahTeknisi">Tambah Teknisi</a> -->
     <div class="row">
         <div class="col-lg">
             <?php if (validation_errors()) : ?>
-            <div class="alert alert-danger" role="alert">
-                <?= validation_errors(); ?>
-            </div>
+                <div class="alert alert-danger" role="alert">
+                    <?= validation_errors(); ?>
+                </div>
             <?php endif; ?>
             <?= $this->session->flashdata('message'); ?>
 
@@ -24,21 +24,21 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Nama Teknisi</th>
                                     <th scope="col">NIK</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col">Gangguan</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $i = 1; ?>
                                 <?php foreach ($teknisi as $t) : ?>
-                                <tr>
-                                    <th scope="row"><?= $i; ?></th>
-                                    <td><?= $t['nama']; ?></td>
-                                    <td><?= $t['nik']; ?></td>
-                                    <td>
-                                        <a href="<?= base_url(); ?>admin/hapusteknisi/<?= $t['id']; ?>" class="badge badge-danger">Delete</a>
-                                    </td>
-                                </tr>
-                                <?php $i++; ?>
+                                    <tr>
+                                        <th scope="row"><?= $i; ?></th>
+                                        <td><?= $t['name']; ?></td>
+                                        <td><?= $t['nik']; ?></td>
+                                        <td>
+                                            <a href="<?= base_url(); ?>admin/hapusteknisi/<?= $t['id']; ?>" class="badge badge-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                    <?php $i++; ?>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>

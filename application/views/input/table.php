@@ -29,7 +29,6 @@
                                     <th scope="col">Teknisi 2</th>
                                     <th scope="col">Helpdesk</th>
                                     <th scope="col">STO</th>
-
                                     <th scope="col">Keterangan</th>
                                     <th scope="col">Tanggal Input</th>
                                     <th scope="col">Action</th>
@@ -37,10 +36,6 @@
                             </thead>
                             <tbody>
                                 <?php $i = 1; ?>
-
-
-
-
                                 <?php foreach ($input as $in) : ?>
 
                                     <tr>
@@ -103,12 +98,12 @@ foreach ($input as $i) :
     $ps1_4 = $i['ps1:4'];
     $ps1_8 = $i['ps1:8'];
     $pigtail = $i['pigtail'];
-    ?>
+?>
     <?php
-        foreach ($hd as $uphd) :
-            $nama = $uphd['name'];
-        endforeach
-        ?>
+    foreach ($hd as $uphd) :
+        $nama = $uphd['name'];
+    endforeach
+    ?>
     <div class="modal fade" id="detail<?php echo $nomor_tiket; ?>" tabindex="-1" role="dialog" aria-labelledby="detailLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -193,10 +188,10 @@ foreach ($input as $i) :
                                     <div class="col-xs-8">
                                         <select name="teknisi1" id="teknisi1" class="custom-select my-0 mr-sm-2">
                                             <?php foreach ($teknisi as $t) : ?>
-                                                <?php if ($teknisi1 == $t['nama']) : ?>
-                                                    <option value="<?= $t['nama']; ?>" selected><?= $t['nama'] ?></option>
+                                                <?php if ($teknisi1 == $t['name']) : ?>
+                                                    <option value="<?= $t['name']; ?>" selected><?= $t['name'] ?></option>
                                                 <?php else : ?>
-                                                    <option value="<?= $t['nama']; ?>"><?= $t['nama']; ?></option>
+                                                    <option value="<?= $t['name']; ?>"><?= $t['name']; ?></option>
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select>
@@ -207,10 +202,10 @@ foreach ($input as $i) :
                                     <div class="col-xs-8">
                                         <select name="teknisi2" id="teknisi2" class="custom-select my-0 mr-sm-2">
                                             <?php foreach ($teknisi as $t) : ?>
-                                                <?php if ($teknisi2 == $t['nama']) : ?>
-                                                    <option value="<?= $t['nama']; ?>" selected><?= $t['nama'] ?></option>
+                                                <?php if ($teknisi2 == $t['name']) : ?>
+                                                    <option value="<?= $t['name']; ?>" selected><?= $t['name'] ?></option>
                                                 <?php else : ?>
-                                                    <option value="<?= $t['nama']; ?>"><?= $t['nama']; ?></option>
+                                                    <option value="<?= $t['name']; ?>"><?= $t['name']; ?></option>
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select>

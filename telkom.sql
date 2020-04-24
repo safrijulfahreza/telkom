@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 27, 2019 at 03:16 PM
--- Server version: 10.1.25-MariaDB
+-- Generation Time: 24 Apr 2020 pada 06.42
+-- Versi Server: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `input`
+-- Struktur dari tabel `input`
 --
 
 CREATE TABLE `input` (
@@ -41,8 +41,8 @@ CREATE TABLE `input` (
   `alpro` varchar(11) NOT NULL,
   `perbaikan` varchar(128) NOT NULL,
   `keterangan` varchar(130) NOT NULL,
-  `tgl_input` timestamp(6) NULL DEFAULT NULL,
-  `tgl_update` timestamp(6) NULL DEFAULT NULL,
+  `tgl_input` timestamp NULL DEFAULT NULL,
+  `tgl_update` timestamp NULL DEFAULT NULL,
   `sleeve` int(11) DEFAULT NULL,
   `adaptor` int(11) DEFAULT NULL,
   `precon50` int(11) DEFAULT NULL,
@@ -51,25 +51,28 @@ CREATE TABLE `input` (
   `precon150` int(11) DEFAULT NULL,
   `ps1:4` int(11) DEFAULT NULL,
   `ps1:8` int(11) DEFAULT NULL,
-  `pigtail` int(11) DEFAULT NULL
+  `pigtail` int(11) DEFAULT NULL,
+  `image` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `input`
+-- Dumping data untuk tabel `input`
 --
 
-INSERT INTO `input` (`id`, `nomor_tiket`, `status`, `layanan`, `segmen`, `teknisi1`, `teknisi2`, `helpdesk`, `sto`, `alpro`, `perbaikan`, `keterangan`, `tgl_input`, `tgl_update`, `sleeve`, `adaptor`, `precon50`, `precon75`, `precon100`, `precon150`, `ps1:4`, `ps1:8`, `pigtail`) VALUES
-(1, 'NJM124572', 'CLOSE', 'METRO E', 'DGS', 'Maulana', 'Saykoji', 'Safrijul Fahreza', 'GLG', 'FO', 'GAMAS BACKBONE', 'Testing aja', '2019-08-24 17:00:00.000000', '2019-08-26 08:28:43.000000', 3, 2, 2, 3, 4, 3, 1, 5, 7),
-(2, 'MDN10092847', 'PENDING', 'METRO E', 'DBS', 'Safrijul Fahreza', 'Saykoji', 'Safrijul Fahreza', 'DLT', 'FO', 'CATUAN LISTRIK PELANGGAN BERMASALAH', 'hggaghavas', '2019-08-24 18:49:58.000000', '2019-08-27 12:42:56.000000', 3, 6, 3, 6, 4, 2, 5, 2, 6),
-(5, 'MDN10938426', 'GAMAS', 'VPN IP', 'DES', 'Maulana', 'Safrijul Fahreza', 'Safrijul Fahreza', 'SPM', 'COOPER', 'BAIK SENDIRI / CALL OK', 'vgjckjgkgjvj', '2019-08-24 19:19:53.000000', '2019-08-25 11:47:57.000000', 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(6, 'JKT18724739027', 'CLOSE', 'VPN IP', 'DGS', 'Safrijul Fahreza', 'Abay', 'Safrijul Fahreza', 'SKI', 'FO', 'KABEL ADAPTOR MODEM/ONT RUSAK', 'mhgcghcghg', '2019-08-24 19:22:41.000000', '2019-08-26 08:28:59.000000', 1, 3, 0, 5, 0, 0, 0, 0, 0),
-(7, 'MTK82784732', 'CLOSE', 'VPN IP', 'DGS', 'Abay', 'Maulana', 'Safrijul Fahreza', 'DLT', 'COOPER', 'KABEL DROP CORE PUTUS', 'Rusak', '2019-08-25 08:23:54.000000', '2019-08-27 11:13:21.000000', 1, 0, 0, 0, 0, 0, 0, 10, 6),
-(8, 'JKT46872834', 'CLOSE', 'METRO E', 'DGS', 'Maulana', 'Wanda', 'Black Mamba', 'TJR', 'FO', 'KONFIGURASI ULANG (CONFIG ULANG)', '', '2019-08-27 11:12:39.000000', '2019-08-27 13:15:25.000000', 0, 2, 0, 0, 0, 0, 0, 0, 0);
+INSERT INTO `input` (`id`, `nomor_tiket`, `status`, `layanan`, `segmen`, `teknisi1`, `teknisi2`, `helpdesk`, `sto`, `alpro`, `perbaikan`, `keterangan`, `tgl_input`, `tgl_update`, `sleeve`, `adaptor`, `precon50`, `precon75`, `precon100`, `precon150`, `ps1:4`, `ps1:8`, `pigtail`, `image`) VALUES
+(1, 'NJM124572', 'CLOSE', 'METRO E', 'DGS', 'Saykoji', 'Ahmad Sahnan', 'Safrijul Fahreza', 'GLG', 'FO', 'GAMAS BACKBONE', 'Testing aja', '2019-08-24 17:00:00', '2020-02-15 16:35:25', 3, 2, 2, 3, 4, 3, 1, 5, 7, ''),
+(2, 'MDN10092847', 'PENDING', 'METRO E', 'DBS', 'Saykoji', 'Test', 'Safrijul Fahreza', 'DLT', 'FO', 'CATUAN LISTRIK PELANGGAN BERMASALAH', 'hggaghavas', '2019-08-24 18:49:58', '2020-02-15 16:35:33', 3, 6, 3, 6, 4, 2, 5, 2, 6, ''),
+(5, 'MDN10938426', 'GAMAS', 'VPN IP', 'DES', 'Black Mamba', 'Saykoji', 'Safrijul Fahreza', 'SPM', 'COOPER', 'BAIK SENDIRI / CALL OK', 'vgjckjgkgjvj', '2019-08-24 19:19:53', '2020-02-15 16:35:41', 0, 0, 0, 0, 0, 0, 0, 0, 0, ''),
+(6, 'JKT18724739027', 'CLOSE', 'VPN IP', 'DGS', 'Saykoji', 'Test', 'Safrijul Fahreza', 'SKI', 'FO', 'KABEL ADAPTOR MODEM/ONT RUSAK', 'mhgcghcghg', '2019-08-24 19:22:41', '2020-02-15 16:35:53', 1, 3, 0, 5, 0, 0, 0, 0, 0, ''),
+(7, 'MTK82784732', 'CLOSE', 'VPN IP', 'DGS', 'Saykoji', 'Black Mamba', 'Safrijul Fahreza', 'DLT', 'COOPER', 'KABEL DROP CORE PUTUS', 'Rusak', '2019-08-25 08:23:54', '2020-02-15 16:36:16', 1, 0, 0, 0, 0, 0, 0, 10, 6, ''),
+(8, 'JKT46872834', 'CLOSE', 'METRO E', 'DGS', 'Test', 'Black Mamba', 'Black Mamba', 'TJR', 'FO', 'KONFIGURASI ULANG (CONFIG ULANG)', '', '2019-08-27 11:12:39', '2020-02-15 16:36:25', 2, 2, 0, 0, 0, 0, 0, 0, 0, ''),
+(9, 'JKL899823747', 'CLOSE', 'METRO E', 'DBS', 'Saykoji', 'Test', 'Ahmad Sahnan', 'SKI', 'FO', 'BAIK SENDIRI / CALL OK', '', '2019-08-28 10:28:37', '2020-02-15 16:36:34', 3, 2, 2, 1, 1, 1, 2, 1, 1, ''),
+(10, 'KJL773929', 'IN TECHNICIAN', 'ASTINET', 'DES', 'Black Mamba', 'Saykoji', 'Safrijul Fahreza', 'DLT', 'FO', 'PORT SPLITTER DI ODP', '', '2020-02-15 16:40:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `perbaikan`
+-- Struktur dari tabel `perbaikan`
 --
 
 CREATE TABLE `perbaikan` (
@@ -78,7 +81,7 @@ CREATE TABLE `perbaikan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `perbaikan`
+-- Dumping data untuk tabel `perbaikan`
 --
 
 INSERT INTO `perbaikan` (`id`, `subsegmen`) VALUES
@@ -126,7 +129,7 @@ INSERT INTO `perbaikan` (`id`, `subsegmen`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sto`
+-- Struktur dari tabel `sto`
 --
 
 CREATE TABLE `sto` (
@@ -135,7 +138,7 @@ CREATE TABLE `sto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `sto`
+-- Dumping data untuk tabel `sto`
 --
 
 INSERT INTO `sto` (`id`, `pilihan`) VALUES
@@ -165,7 +168,7 @@ INSERT INTO `sto` (`id`, `pilihan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `teknisi`
+-- Struktur dari tabel `teknisi`
 --
 
 CREATE TABLE `teknisi` (
@@ -175,7 +178,7 @@ CREATE TABLE `teknisi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `teknisi`
+-- Dumping data untuk tabel `teknisi`
 --
 
 INSERT INTO `teknisi` (`id`, `nama`, `nik`) VALUES
@@ -188,13 +191,13 @@ INSERT INTO `teknisi` (`id`, `nama`, `nik`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
-  `email` varchar(128) NOT NULL,
+  `nik` varchar(128) NOT NULL,
   `image` varchar(128) NOT NULL,
   `password` varchar(256) NOT NULL,
   `role_id` int(11) NOT NULL,
@@ -203,20 +206,22 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `date_created`) VALUES
+INSERT INTO `user` (`id`, `name`, `nik`, `image`, `password`, `role_id`, `is_active`, `date_created`) VALUES
 (1, 'Safrijul Fahreza', '1657301075', 'SF.jpg', '$2y$10$S6YyTRjY.zrtmQUj9Kv9X.STBcVJHRIuH7gQbrwlcn2DoG.9Ic5.u', 1, 1, 1563688183),
 (2, 'Safrijul Fahreza', '1657301071', 'default.jpg', '$2y$10$1HfsfalpoLNcBrPexe4IQe85t8O/UJn6q66pCyT3wfvglhKePv35i', 2, 1, 1563706830),
-(3, 'Black Mamba', '1657301011', 'default.jpg', '$2y$10$516qFNgN7loCVFdfSaydyuhrNHMaE55th5jBy3rfmWNsEWjsC/Xyq', 2, 0, 1566903926),
+(3, 'Black Mamba', '1657301011', 'default.jpg', '$2y$10$516qFNgN7loCVFdfSaydyuhrNHMaE55th5jBy3rfmWNsEWjsC/Xyq', 3, 1, 1566903926),
 (5, 'Reza', '1657301076', 'default.jpg', '$2y$10$uY7UOKFRw4z1uF.xadB8X.NJ0Fi5VbsBcn8oe0zyLyudB2Zclaxsm', 2, 0, 1566907310),
-(6, 'Saykoji', '1657301070', 'default.jpg', '$2y$10$7qlEJZKrpAOFIZE4WR.chuKCEx3iQsaS188drMe8tgSp4H.4joXPq', 2, 0, 1566907331);
+(6, 'Saykoji', '1657301070', 'default.jpg', '$2y$10$7qlEJZKrpAOFIZE4WR.chuKCEx3iQsaS188drMe8tgSp4H.4joXPq', 3, 1, 1566907331),
+(7, 'Ahmad Sahnan', '95150306', 'default.jpg', '$2y$10$IzxOqCVmtWaKUVID5lssS.ixuBdYIN.WmgSAMXMGYwKT0n4SbPs.m', 3, 1, 1566988061),
+(9, 'Test', '1234567', 'default.jpg', '$2y$10$8.5d725QpW0sc8bF/ZxfVuMaK96XZLAOfkjHh7OXmpbneScxnzgqi', 3, 1, 1581612771);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_access_menu`
+-- Struktur dari tabel `user_access_menu`
 --
 
 CREATE TABLE `user_access_menu` (
@@ -226,7 +231,7 @@ CREATE TABLE `user_access_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user_access_menu`
+-- Dumping data untuk tabel `user_access_menu`
 --
 
 INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
@@ -235,12 +240,17 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (5, 1, 5),
 (6, 2, 5),
 (7, 1, 3),
-(8, 1, 2);
+(8, 1, 2),
+(10, 2, 6),
+(11, 1, 6),
+(13, 3, 6),
+(14, 3, 5),
+(15, 3, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_menu`
+-- Struktur dari tabel `user_menu`
 --
 
 CREATE TABLE `user_menu` (
@@ -249,19 +259,20 @@ CREATE TABLE `user_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user_menu`
+-- Dumping data untuk tabel `user_menu`
 --
 
 INSERT INTO `user_menu` (`id`, `menu`) VALUES
 (1, 'Admin'),
 (2, 'User'),
 (3, 'Menu'),
-(5, 'Input');
+(5, 'Input'),
+(6, 'Performance');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_role`
+-- Struktur dari tabel `user_role`
 --
 
 CREATE TABLE `user_role` (
@@ -270,17 +281,18 @@ CREATE TABLE `user_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user_role`
+-- Dumping data untuk tabel `user_role`
 --
 
 INSERT INTO `user_role` (`id`, `role`) VALUES
 (1, 'Administrator'),
-(2, 'Member');
+(2, 'Helpdesk'),
+(3, 'Teknisi');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_sub_menu`
+-- Struktur dari tabel `user_sub_menu`
 --
 
 CREATE TABLE `user_sub_menu` (
@@ -293,7 +305,7 @@ CREATE TABLE `user_sub_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user_sub_menu`
+-- Dumping data untuk tabel `user_sub_menu`
 --
 
 INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active`) VALUES
@@ -306,10 +318,11 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (7, 1, 'Role', 'admin/role', 'fas fa-fw fa-user-tie', 1),
 (8, 1, 'Teknisi', 'admin/teknisi', 'fas fa-fw fa-wrench', 1),
 (9, 2, 'Change Password', 'user/changepassword', 'fas fa-fw fa-key', 1),
-(10, 5, 'Table', 'input/table', 'fas fa-fw fa-table', 1),
+(10, 6, 'Report Status Ticket', 'input/table', 'fas fa-fw fa-table', 1),
 (11, 1, 'Sub Segmentasi', 'admin/subsegmentasi', 'fas fa-fw fa-flag', 1),
 (12, 5, 'Grafik', 'input/grafik', 'fas fa-fw fa-chart-line', 1),
-(13, 1, 'Registrasi', 'admin/registrasi', 'fas fa-fw fa-users', 1);
+(13, 1, 'Registrasi User', 'admin/registrasi', 'fas fa-fw fa-users', 1),
+(14, 6, 'Report Technician', 'input/tech', 'fas fa-fw fa-hard-hat', 1);
 
 --
 -- Indexes for dumped tables
@@ -377,7 +390,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT for table `input`
 --
 ALTER TABLE `input`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `perbaikan`
 --
@@ -397,27 +410,27 @@ ALTER TABLE `teknisi`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

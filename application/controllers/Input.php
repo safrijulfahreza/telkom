@@ -14,7 +14,8 @@ class Input extends CI_Controller
         $data['title'] = 'Input';
         $data['user'] = $this->db->get_where('user', ['nik' => $this->session->userdata('nik')])->row_array();
 
-        $data['teknisi'] = $this->db->get('teknisi')->result_array();
+        $this->load->model('Teknisi_model', 'teknisi');
+        $data['teknisi'] = $this->teknisi->getTeknisi();
         $data['perbaikan'] = $this->db->get('perbaikan')->result_array();
         $data['sto'] = $this->db->get('sto')->result_array();
 
@@ -63,59 +64,60 @@ class Input extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['nik' => $this->session->userdata('nik')])->row_array();
         $data['perbaikan'] = $this->db->get('perbaikan')->result_array();
         $data['sto'] = $this->db->get('sto')->result_array();
-        $data['teknisi'] = $this->db->get('teknisi')->result_array();
+        $this->load->model('Teknisi_model', 'teknisi');
+        $data['teknisi'] = $this->teknisi->getTeknisi();
         $data['helpdeskk'] = $this->db->get('user')->result_array();
 
         $this->db->select('name');
         $data['hd'] = $this->db->get('user')->result_array();
 
-        $f_sto = $this->input->post('f_sto');
-        $f_help = $this->input->post('f_helpdesk');
-        $f_segmen = $this->input->post('f_segmen');
+        // $f_sto = $this->input->post('f_sto');
+        // $f_help = $this->input->post('f_helpdesk');
+        // $f_segmen = $this->input->post('f_segmen');
 
         // var_dump($f_sto);
         // die;
 
-        // $data['input'] = $this->db->get_where('input', ['sto' => $f_sto, 'helpdesk' => $f_help, 'segmen' => $f_segmen])->result_array();
-        // $this->load->view('templates/header', $data);
-        // $this->load->view('templates/sidebar', $data);
-        // $this->load->view('templates/topbar', $data);
-        // $this->load->view('input/table', $data);
-        // $this->load->view('templates/footer');
+        $data['input'] = $this->db->get('input')->result_array();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        // filtering
-        if ($f_sto != "" && $f_help != "" && $f_segmen != "") {
-            $data['input'] = $this->db->get_where('input', ['sto' => $f_sto, 'helpdesk' => $f_help, 'segmen' => $f_segmen])->result_array();
-            $this->load->view('input/table', $data);
-            if (isset($_POST['filter'])) {
-                $data['input'] = $this->db->get_where('input', ['sto' => $f_sto, 'helpdesk' => $f_help, 'segmen' => $f_segmen])->result_array();
-                $this->load->view('input/export', $data);
-            }
-        } elseif ($f_sto != "" && $f_help != "") {
-            $data['input'] = $this->db->get_where('input', ['sto' => $f_sto, 'helpdesk' => $f_help])->result_array();
-            $this->load->view('input/table', $data);
-        } elseif ($f_help != "" && $f_segmen != "") {
-            $data['input'] = $this->db->get_where('input', ['helpdesk' => $f_help, 'segmen' => $f_segmen])->result_array();
-            $this->load->view('input/table', $data);
-        } elseif ($f_sto != "" && $f_segmen != "") {
-            $data['input'] = $this->db->get_where('input', ['sto' => $f_sto, 'segmen' => $f_segmen])->result_array();
-            $this->load->view('input/table', $data);
-        } elseif ($f_sto != "") {
-            $data['input'] = $this->db->get_where('input', ['sto' => $f_sto])->result_array();
-            $this->load->view('input/table', $data);
-        } elseif ($f_help != "") {
-            $data['input'] = $this->db->get_where('input', ['helpdesk' => $f_help])->result_array();
-            $this->load->view('input/table', $data);
-        } elseif ($f_segmen) {
-            $data['input'] = $this->db->get_where('input', ['segmen' => $f_segmen])->result_array();
-            $this->load->view('input/table', $data);
-        } else {
-            $data['input'] = $this->db->get('input')->result_array();
-            $this->load->view('input/table', $data);
-        }
+        $this->load->view('input/table', $data);
         $this->load->view('templates/footer');
+        // $this->load->view('templates/header', $data);
+        // $this->load->view('templates/sidebar', $data);
+        // $this->load->view('templates/topbar', $data);
+        // filtering
+        // if ($f_sto != "" && $f_help != "" && $f_segmen != "") {
+        //     $data['input'] = $this->db->get_where('input', ['sto' => $f_sto, 'helpdesk' => $f_help, 'segmen' => $f_segmen])->result_array();
+        //     $this->load->view('input/table', $data);
+        //     if (isset($_POST['filter'])) {
+        //         $data['input'] = $this->db->get_where('input', ['sto' => $f_sto, 'helpdesk' => $f_help, 'segmen' => $f_segmen])->result_array();
+        //         $this->load->view('input/export', $data);
+        //     }
+        // } elseif ($f_sto != "" && $f_help != "") {
+        //     $data['input'] = $this->db->get_where('input', ['sto' => $f_sto, 'helpdesk' => $f_help])->result_array();
+        //     $this->load->view('input/table', $data);
+        // } elseif ($f_help != "" && $f_segmen != "") {
+        //     $data['input'] = $this->db->get_where('input', ['helpdesk' => $f_help, 'segmen' => $f_segmen])->result_array();
+        //     $this->load->view('input/table', $data);
+        // } elseif ($f_sto != "" && $f_segmen != "") {
+        //     $data['input'] = $this->db->get_where('input', ['sto' => $f_sto, 'segmen' => $f_segmen])->result_array();
+        //     $this->load->view('input/table', $data);
+        // } elseif ($f_sto != "") {
+        //     $data['input'] = $this->db->get_where('input', ['sto' => $f_sto])->result_array();
+        //     $this->load->view('input/table', $data);
+        // } elseif ($f_help != "") {
+        //     $data['input'] = $this->db->get_where('input', ['helpdesk' => $f_help])->result_array();
+        //     $this->load->view('input/table', $data);
+        // } elseif ($f_segmen) {
+        //     $data['input'] = $this->db->get_where('input', ['segmen' => $f_segmen])->result_array();
+        //     $this->load->view('input/table', $data);
+        // } else {
+        //     $data['input'] = $this->db->get('input')->result_array();
+        //     $this->load->view('input/table', $data);
+        // }
+        // $this->load->view('templates/footer');
     }
 
     public function update()

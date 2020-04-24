@@ -5,9 +5,9 @@
 
     <div class="mt-3">
         <?php if (validation_errors()) : ?>
-        <div class="alert alert-danger" role="alert">
-            <?= validation_errors(); ?>
-        </div>
+            <div class="alert alert-danger" role="alert">
+                <?= validation_errors(); ?>
+            </div>
         <?php endif; ?>
         <?= $this->session->flashdata('message'); ?>
     </div>
@@ -53,7 +53,7 @@
                     <select class="custom-select my-0 mr-sm-2" id="teknisi1" name="teknisi1">
                         <option selected value="">Pilih</option>
                         <?php foreach ($teknisi as $t) : ?>
-                        <option value="<?= $t['nama']; ?>"><?= $t['nama']; ?></option>
+                            <option value="<?= $t['name']; ?>"><?= $t['name']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -62,7 +62,7 @@
                     <select class="custom-select my-0 mr-sm-2" id="teknisi2" name="teknisi2">
                         <option selected value="">Pilih</option>
                         <?php foreach ($teknisi as $t) : ?>
-                        <option value="<?= $t['nama']; ?>"><?= $t['nama']; ?></option>
+                            <option value="<?= $t['name']; ?>"><?= $t['name']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -72,7 +72,7 @@
                 <select class="custom-select my-0 mr-sm-2" name="sto" id="sto">
                     <option selected value="">Pilih</option>
                     <?php foreach ($sto as $s) : ?>
-                    <option value="<?= $s['pilihan']; ?>"><?= $s['pilihan']; ?></option>
+                        <option value="<?= $s['pilihan']; ?>"><?= $s['pilihan']; ?></option>
                     <?php endforeach; ?>
                 </select>
                 <div class="mt-2">
@@ -88,7 +88,7 @@
                     <select class="custom-select my-0 mr-sm-2" id="subsegmen" name="subsegmen">
                         <option selected value="">Pilih</option>
                         <?php foreach ($perbaikan as $p) : ?>
-                        <option value="<?= $p['subsegmen']; ?>"><?= $p['subsegmen']; ?></option>
+                            <option value="<?= $p['subsegmen']; ?>"><?= $p['subsegmen']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

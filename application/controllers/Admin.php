@@ -92,8 +92,8 @@ class Admin extends CI_Controller
     {
         $data['title'] = 'Teknisi';
         $data['user'] = $this->db->get_where('user', ['nik' => $this->session->userdata('nik')])->row_array();
-
-        $data['teknisi'] = $this->db->get('teknisi')->result_array();
+        $this->load->model('Teknisi_model', 'teknisi');
+        $data['teknisi'] = $this->teknisi->getTeknisi();
 
         $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('nik', 'Nik', 'required');
@@ -155,7 +155,7 @@ class Admin extends CI_Controller
 
     public function registrasi()
     {
-        $data['title'] = 'Registrasi';
+        $data['title'] = 'Registrasi User';
         $data['user'] = $this->db->get_where('user', ['nik' => $this->session->userdata('nik')])->row_array();
 
         $data['regis'] = $this->db->get('user')->result_array();

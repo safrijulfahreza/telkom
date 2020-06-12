@@ -51,8 +51,8 @@
                                         <td><?= $in['keterangan'] ?></td>
                                         <td><?= substr($in['tgl_input'], -19, -9); ?></td>
                                         <td>
-                                            <a href="<?= base_url(); ?>input/table/<?= $in['id']; ?>" data-id="<?= $i; ?>" class="badge badge-primary" data-toggle="modal" data-target="#detail<?php echo $in['nomor_tiket']; ?>">Detail</a>
-                                            <a href="<?= base_url(); ?>input/hapus/<?= $in['id']; ?>" class="badge badge-danger">Delete</a>
+                                            <a href="<?= base_url(); ?>input/table/<?= $in['nomor_tiket']; ?>" data-id="<?= $i; ?>" class="badge badge-primary" data-toggle="modal" data-target="#detail<?php echo $in['nomor_tiket']; ?>">Detail</a>
+                                            <a href="<?= base_url(); ?>input/hapus/<?= $in['nomor_tiket']; ?>" class="badge badge-danger">Delete</a>
                                         </td>
                                     </tr>
                                     <?php $i++; ?>
@@ -74,7 +74,7 @@
 <!-- Modal -->
 <?php
 foreach ($input as $i) :
-    $id = $i['id'];
+    $id = $i['nomor_tiket'];
     $nomor_tiket = $i['nomor_tiket'];
     $status = $i['status'];
     $layanan = $i['layanan'];
@@ -88,7 +88,6 @@ foreach ($input as $i) :
     $keterangan = $i['keterangan'];
     $tgl_input = $i['tgl_input'];
     $tgl_update = $i['tgl_update'];
-    // $durasi = $i['durasi'];
     $sleeve = $i['sleeve'];
     $adaptor = $i['adaptor'];
     $precon50 = $i['precon50'];
@@ -99,11 +98,6 @@ foreach ($input as $i) :
     $ps1_8 = $i['ps1:8'];
     $pigtail = $i['pigtail'];
 ?>
-    <?php
-    foreach ($hd as $uphd) :
-        $nama = $uphd['name'];
-    endforeach
-    ?>
     <div class="modal fade" id="detail<?php echo $nomor_tiket; ?>" tabindex="-1" role="dialog" aria-labelledby="detailLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -153,15 +147,7 @@ foreach ($input as $i) :
                         <div class="form-group">
                             <label class="control-label col-xs-3">Helpdesk</label>
                             <div class="col-xs-8">
-                                <select name="hd" id="hd" class="custom-select my-0 mr-sm-2">
-                                    <?php foreach ($hd as $uphd) : ?>
-                                        <?php if ($helpdesk == $uphd['name']) : ?>
-                                            <option value="<?= $uphd['name']; ?>" selected><?= $uphd['name'] ?></option>
-                                        <?php else : ?>
-                                            <option value="<?= $uphd['name']; ?>"><?= $uphd['name']; ?></option>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
-                                </select>
+                                <input name="helpdesk" id="helpdesk" value="<?php echo $helpdesk; ?>" class="form-control" type="text" readonly>
                             </div>
                         </div>
 
@@ -228,16 +214,6 @@ foreach ($input as $i) :
                                         <span class="btn btn-secondary"><?= substr($i['tgl_update'], -19, -9); ?> </span>
                                     </div>
                                 </div>
-                                <!-- <div class="col">
-                                    <label class="control-label col-xs-3">Durasi</label>
-                                    <div class="col-xs-8">
-                                        
-                                            <span class="btn btn-secondary">Sedang berjalan</span>
-                                        
-                                            <span class="btn btn-secondary"></span>
-                                        
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                         <div class="form-group">
@@ -389,6 +365,22 @@ foreach ($input as $i) :
                             </div>
 
                         </div>
+                        <div class="form-group">
+                            <label class="control-label">History</label>
+                        </div>
+                        <?php
+                        foreach ($history as $his) :
+                            $id = $his['id'];
+                            $nomor = $his['nomor'];
+                            $hd = $his['hd'];
+                            $status = $his['status'];
+                            $waktu = $his['waktu'];
+                            $name = $his['name'];
+                        ?>
+                            <?php if ($nomor == $nomor_tiket) : ?>
+                                <div class="alert alert-secondary" role="alert"><?= $name; ?> Melakukan update <?= $status; ?> | <?= $waktu; ?></div>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                     </div>
 
                     <div class="modal-footer">

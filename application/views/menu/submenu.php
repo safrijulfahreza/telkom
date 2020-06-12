@@ -34,7 +34,7 @@
                             <td><?= $sm['icon']; ?></td>
                             <td><?= $sm['is_active']; ?></td>
                             <td>
-                                <a href="" class="badge badge-success">edit</a>
+                                <a href="<?= base_url(); ?>menu/submenu/<?= $sm['id']; ?>" data-id="<?= $i; ?>" class="badge badge-success" data-toggle="modal" data-target="#editSubMenu<?php echo $sm['id']; ?>">edit</a>
                                 <a href="" class="badge badge-danger">delete</a>
                             </td>
                         </tr>
@@ -96,3 +96,67 @@
         </div>
     </div>
 </div>
+<!-- Modal -->
+<?php
+foreach ($subMenu as $i) :
+    $id = $i['id'];
+    $menu_id = $i['menu_id'];
+    $title = $i['title'];
+    $url = $i['url'];
+    $icon = $i['icon'];
+    $is_active = $i['is_active'];
+
+?>
+    <div class="modal fade" id="editSubMenu<?= $id; ?>" tabindex="-1" role="dialog" aria-labelledby="editSubMenuLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editSubMenuLabel">Edit Sub Menu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="<?= base_url('menu/submenu'); ?>" method="post">
+                    <div class="modal-body">
+                        <label class="control-label col-xs-3">Judul Submenu</label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Masukkan Judul Submenu">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3">Pilih Menu</label>
+                            <select name="menu_id" id="menu_id" class="form-control">
+                                <?php foreach ($menu as $id) : ?>
+                                    <?php if ($menu == $id['id']) : ?>
+                                        <option value="<?= $id['menu']; ?>" selected><?= $id['menu'] ?></option>
+                                    <?php else : ?>
+                                        <option value="<?= $id['menu']; ?>"><?= $id['menu']; ?></option>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3">Submenu URL</label>
+                            <input type="text" class="form-control" id="url" name="url" placeholder="Masukkan url">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3">Icon (Font Awesome ICON)</label>
+                            <input type="text" class="form-control" id="icon" name="icon" placeholder="Submenu icon">
+                        </div>
+                        <div class="formm-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="is_active" name="is_active" checked>
+                                <label class="form-check-label" for="is_active">
+                                    Active?
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>

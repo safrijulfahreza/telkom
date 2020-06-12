@@ -11,7 +11,7 @@ class Input extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'Input';
+        $data['title'] = 'Input Laporan';
         $data['user'] = $this->db->get_where('user', ['nik' => $this->session->userdata('nik')])->row_array();
 
         $this->load->model('Teknisi_model', 'teknisi');
@@ -71,62 +71,28 @@ class Input extends CI_Controller
         $this->db->select('name');
         $data['hd'] = $this->db->get('user')->result_array();
 
-        // $f_sto = $this->input->post('f_sto');
-        // $f_help = $this->input->post('f_helpdesk');
-        // $f_segmen = $this->input->post('f_segmen');
 
-        // var_dump($f_sto);
+        $this->load->model('History_model', 'history');
+        $data['history'] = $this->history->getHistory();
+        // var_dump($data['history']);
         // die;
 
-        $data['input'] = $this->db->get('input')->result_array();
+        $this->load->model('Table_model', 'laporan');
+        $data['input'] = $this->laporan->getLaporanASC();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('input/table', $data);
         $this->load->view('templates/footer');
-        // $this->load->view('templates/header', $data);
-        // $this->load->view('templates/sidebar', $data);
-        // $this->load->view('templates/topbar', $data);
-        // filtering
-        // if ($f_sto != "" && $f_help != "" && $f_segmen != "") {
-        //     $data['input'] = $this->db->get_where('input', ['sto' => $f_sto, 'helpdesk' => $f_help, 'segmen' => $f_segmen])->result_array();
-        //     $this->load->view('input/table', $data);
-        //     if (isset($_POST['filter'])) {
-        //         $data['input'] = $this->db->get_where('input', ['sto' => $f_sto, 'helpdesk' => $f_help, 'segmen' => $f_segmen])->result_array();
-        //         $this->load->view('input/export', $data);
-        //     }
-        // } elseif ($f_sto != "" && $f_help != "") {
-        //     $data['input'] = $this->db->get_where('input', ['sto' => $f_sto, 'helpdesk' => $f_help])->result_array();
-        //     $this->load->view('input/table', $data);
-        // } elseif ($f_help != "" && $f_segmen != "") {
-        //     $data['input'] = $this->db->get_where('input', ['helpdesk' => $f_help, 'segmen' => $f_segmen])->result_array();
-        //     $this->load->view('input/table', $data);
-        // } elseif ($f_sto != "" && $f_segmen != "") {
-        //     $data['input'] = $this->db->get_where('input', ['sto' => $f_sto, 'segmen' => $f_segmen])->result_array();
-        //     $this->load->view('input/table', $data);
-        // } elseif ($f_sto != "") {
-        //     $data['input'] = $this->db->get_where('input', ['sto' => $f_sto])->result_array();
-        //     $this->load->view('input/table', $data);
-        // } elseif ($f_help != "") {
-        //     $data['input'] = $this->db->get_where('input', ['helpdesk' => $f_help])->result_array();
-        //     $this->load->view('input/table', $data);
-        // } elseif ($f_segmen) {
-        //     $data['input'] = $this->db->get_where('input', ['segmen' => $f_segmen])->result_array();
-        //     $this->load->view('input/table', $data);
-        // } else {
-        //     $data['input'] = $this->db->get('input')->result_array();
-        //     $this->load->view('input/table', $data);
-        // }
-        // $this->load->view('templates/footer');
     }
 
     public function update()
     {
+        $temp = $this->db->get_where('input', ['nomor_tiket' => $this->input->post('nomor')])->row_array();
         $data = [
             'status' => $this->input->post('status'),
             'teknisi1' => $this->input->post('teknisi1'),
             'teknisi2' => $this->input->post('teknisi2'),
-            'helpdesk' => $this->input->post('hd'),
             'perbaikan' => $this->input->post('subsegmen'),
             'keterangan' => $this->input->post('keterangan'),
             'sleeve' => $this->input->post('sleeve'),
@@ -144,8 +110,20 @@ class Input extends CI_Controller
         $this->db->where('nomor_tiket', $this->input->post('nomor'));
         $this->db->update('input');
 
-        // $this->db->query('UPDATE input SET durasi = timediff(tgl_update, tgl_input) WHERE status = \'CLOSE\'');
+        if ($temp['status'] == $this->input->post('status')) {
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data di update!</div>');
+            redirect('input/table');
+        } else {
+            $history = [
+                'nomor' => $this->input->post('nomor'),
+                'hd' => $this->session->userdata('nik'),
+                'status' => $this->input->post('status')
+            ];
+            $this->db->set('waktu', 'NOW()', FALSE);
+            $this->db->insert('history', $history);
+        }
 
+        // $this->db->query('UPDATE input SET durasi = timediff(tgl_update, tgl_input) WHERE status = \'CLOSE\'');
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data di update!</div>');
         redirect('input/table');
     }

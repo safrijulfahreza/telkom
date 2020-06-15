@@ -74,8 +74,6 @@ class Input extends CI_Controller
 
         $this->load->model('History_model', 'history');
         $data['history'] = $this->history->getHistory();
-        // var_dump($data['history']);
-        // die;
 
         $this->load->model('Table_model', 'laporan');
         $data['input'] = $this->laporan->getLaporanASC();

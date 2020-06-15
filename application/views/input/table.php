@@ -99,7 +99,7 @@ foreach ($input as $i) :
     $pigtail = $i['pigtail'];
 ?>
     <div class="modal fade" id="detail<?php echo $nomor_tiket; ?>" tabindex="-1" role="dialog" aria-labelledby="detailLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="detailLabel">Detail</h5>
@@ -393,4 +393,4 @@ foreach ($input as $i) :
     </div>
 
 <?php endforeach; ?>
-<!--END MODAL ADD BARANG-->
+<!--END MODAL ADD-->

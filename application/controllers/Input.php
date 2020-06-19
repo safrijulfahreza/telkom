@@ -50,6 +50,7 @@ class Input extends CI_Controller
                 'alpro' => $this->input->post('alpro'),
                 'perbaikan' => $this->input->post('subsegmen'),
                 'keterangan' => $this->input->post('keterangan'),
+                'image' => 'default.png'
             ];
             $this->db->set('tgl_input', 'NOW()', FALSE);
             $this->db->insert('input', $data);
@@ -162,6 +163,36 @@ class Input extends CI_Controller
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('input/tech', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function fotrate($nomor_tiket)
+    {
+        $data['title'] = 'Foto Dan Rating';
+        $data['user'] = $this->db->get_where('user', ['nik' => $this->session->userdata('nik')])->row_array();
+
+        $data['nomor_tiket'] = $nomor_tiket;
+        $data['penilaian'] = $this->db->get_where('penilaian', ['nomor_tiket' => $data['nomor_tiket']])->row_array();
+        $data['laporan'] = $this->db->get_where('input', ['nomor_tiket' => $data['nomor_tiket']])->row_array();
+        $str = md5($nomor_tiket);
+
+        if ($data['penilaian'] == null) {
+            $data = [
+                'nomor_tiket' => $nomor_tiket,
+                'token' => $str
+            ];
+            $this->db->insert('penilaian', $data);
+        } else {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('input/fotrate', $data);
+            $this->load->view('templates/footer');
+        }
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('input/fotrate', $data);
         $this->load->view('templates/footer');
     }
 }

@@ -384,7 +384,8 @@ foreach ($input as $i) :
                     </div>
 
                     <div class="modal-footer">
-                        <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                        <a class="btn btn-success active" href="<?= base_url(); ?>input/fotrate/<?= $nomor_tiket; ?>">Rating & Foto</a>
+                        <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">Tutup</button>
                         <button class="btn btn-info">Update</button>
                     </div>
                 </form>

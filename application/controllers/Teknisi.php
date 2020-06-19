@@ -81,7 +81,7 @@ class Teknisi extends CI_Controller
         $data['title'] = 'Upload Foto';
         $data['user'] = $this->db->get_where('user', ['nik' => $this->session->userdata('nik')])->row_array();
         $data['nomor_tiket'] = $nomor_tiket;
-        $data['laporan'] = $this->db->get('input')->result_array();
+        $data['laporan'] = $this->db->get_where('input', ['nomor_tiket' => $data['nomor_tiket']])->row_array();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -95,17 +95,32 @@ class Teknisi extends CI_Controller
         $data['title'] = 'Upload Foto';
         $data['user'] = $this->db->get_where('user', ['nik' => $this->session->userdata('nik')])->row_array();
         $data['nomor_tiket'] = $this->input->post('nomor_tiket');
+        $data['laporan'] = $this->db->get_where('input', ['nomor_tiket' => $data['nomor_tiket']])->row_array();
 
-        var_dump($data['nomor_tiket']);
-        die;
+        //cek jika ada gambar yang diupload
+        $upload_image = $_FILES['foto']['name'];
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('teknisi/foto', $data);
-        $this->load->view('templates/footer');
+        if ($upload_image) {
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size'] = '2048';
+            $config['upload_path'] = './assets/img/laporan/';
+            $this->load->library('upload', $config);
 
-        // $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Your profile has been updated!</div>');
+            if ($this->upload->do_upload('foto')) {
+                $old_image = $data['laporan']['image'];
+                if ($old_image != 'default.png') {
+                    unlink(FCPATH . 'assets/img/laporan/' . $old_image);
+                }
+                $new_image = $this->upload->data('file_name');
+                $this->db->set('image', $new_image);
+            } else {
+                echo $this->upload->display_errors();
+            }
+        }
+        $this->db->where('nomor_tiket', $data['nomor_tiket']);
+        $this->db->update('input');
 
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Berhasil Di Update!</div>');
+        redirect('teknisi');
     }
 }

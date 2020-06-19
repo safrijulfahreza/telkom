@@ -5,7 +5,7 @@
 
     <div class="row">
         <div class="col-lg-8">
-            <form id="myForm" action="<?= base_url('teknisi/upload'); ?>" method="POST">
+            <form id="myForm" action="<?= base_url('teknisi/upload'); ?>" enctype="multipart/form-data" method="POST">
                 <div class="form-group row">
                     <label for="nik" class="col-sm-2 col-form-label">Nomor Tiket</label>
                     <div class="col-sm-10">
@@ -17,7 +17,7 @@
                     <div class="col-sm-10">
                         <div class="row">
                             <div class="col-sm-7">
-                                <img src="<?= base_url('assets/img/profile/') . $user['image']; ?>" class="img-fluid" alt="Responsive image">
+                                <img src="<?= base_url('assets/img/laporan/') . $laporan['image']; ?>" class="img-thumbnail" alt="Responsive image">
                             </div>
                             <div class="col-sm-9">
                                 <div class="custom-file">

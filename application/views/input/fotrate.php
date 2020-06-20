@@ -25,7 +25,7 @@
             <div class="form-group row">
                 <div class="col-sm-2">URL Rating</div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="url" name="url" value="<?= base_url('/rating/') . $penilaian['token']; ?>" readonly>
+                    <input type="text" class="form-control" id="url" name="url" value="<?= base_url('/rating/index/') . $penilaian['token']; ?>" readonly>
                     <button onclick="myFunction()" onmouseout="outFunc()" class="btn btn-secondary">
                         <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
                     </button>

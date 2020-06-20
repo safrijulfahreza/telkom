@@ -79,6 +79,39 @@
             }
         });
     });
+
+    // function rating yang belum beres
+    // $(document).ready(function() {
+    //     var $inp = $('#rating-input');
+
+    //     //$inp.attr('value','4');
+
+    //     $inp.rating({
+    //         min: 0,
+    //         max: 5,
+    //         step: 1,
+    //         size: 'sm',
+    //         showClear: false
+    //     });
+    //     $inp.on('rating.change', function() {
+    //         alert('Nilai rating : ' + $('#rating-input').val());
+    //     });
+    // });
+
+    function myFunction() {
+        var copyText = document.getElementById("url");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+
+        var tooltip = document.getElementById("myTooltip");
+        tooltip.innerHTML = "Copied: " + copyText.value;
+    }
+
+    function outFunc() {
+        var tooltip = document.getElementById("myTooltip");
+        tooltip.innerHTML = "Copy to clipboard";
+    }
 </script>
 
 </body>

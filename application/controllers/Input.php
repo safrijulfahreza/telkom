@@ -52,8 +52,13 @@ class Input extends CI_Controller
                 'keterangan' => $this->input->post('keterangan'),
                 'image' => 'default.png'
             ];
+            $data2 = [
+                'nomor_tiket' => $this->input->post('nomor'),
+                'token' => md5($this->input->post('nomor'))
+            ];
             $this->db->set('tgl_input', 'NOW()', FALSE);
             $this->db->insert('input', $data);
+            $this->db->insert('penilaian', $data2);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil ditambah</div>');
             redirect('input');
         }
@@ -174,21 +179,7 @@ class Input extends CI_Controller
         $data['nomor_tiket'] = $nomor_tiket;
         $data['penilaian'] = $this->db->get_where('penilaian', ['nomor_tiket' => $data['nomor_tiket']])->row_array();
         $data['laporan'] = $this->db->get_where('input', ['nomor_tiket' => $data['nomor_tiket']])->row_array();
-        $str = md5($nomor_tiket);
 
-        if ($data['penilaian'] == null) {
-            $data = [
-                'nomor_tiket' => $nomor_tiket,
-                'token' => $str
-            ];
-            $this->db->insert('penilaian', $data);
-        } else {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('input/fotrate', $data);
-            $this->load->view('templates/footer');
-        }
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);

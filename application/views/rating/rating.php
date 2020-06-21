@@ -195,13 +195,15 @@
                 </li>
             </ul>
         </div>
-
-        <div class='success-box'>
-            <div class='clearfix'></div>
-            <img alt='tick image' width='32' src='data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA0MjYuNjY3IDQyNi42NjciIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQyNi42NjcgNDI2LjY2NzsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxwYXRoIHN0eWxlPSJmaWxsOiM2QUMyNTk7IiBkPSJNMjEzLjMzMywwQzk1LjUxOCwwLDAsOTUuNTE0LDAsMjEzLjMzM3M5NS41MTgsMjEzLjMzMywyMTMuMzMzLDIxMy4zMzMgIGMxMTcuODI4LDAsMjEzLjMzMy05NS41MTQsMjEzLjMzMy0yMTMuMzMzUzMzMS4xNTcsMCwyMTMuMzMzLDB6IE0xNzQuMTk5LDMyMi45MThsLTkzLjkzNS05My45MzFsMzEuMzA5LTMxLjMwOWw2Mi42MjYsNjIuNjIyICBsMTQwLjg5NC0xNDAuODk4bDMxLjMwOSwzMS4zMDlMMTc0LjE5OSwzMjIuOTE4eiIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K' />
-            <div class='text-message'></div>
-            <div class='clearfix'></div>
-        </div>
+        <form method="POST" action="<?= base_url('rating/update'); ?>">
+            <div class='success-box'>
+                <textarea class="form-control" placeholder="Keterangan" row="3" id="ket" name="ket"></textarea>
+                <br>
+                <input type="hidden" name="rate" id="rate">
+                <input type="hidden" name="token" id="token" value="<?= $token; ?>">
+                <button class="btn btn-success" type="submit">Submit</button>
+            </div>
+        </form>
 
 
 
@@ -249,23 +251,15 @@
 
                 // JUST RESPONSE (Not needed)
                 var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
-                var msg = "";
-                if (ratingValue > 1) {
-                    msg = "Thanks! You rated this " + ratingValue + " stars.";
-                } else {
-                    msg = "We will improve ourselves. You rated this " + ratingValue + " stars.";
-                }
-                responseMessage(msg);
-
+                rate(ratingValue);
             });
+
+            function rate(ratingValue) {
+                document.getElementById('rate').value = ratingValue;
+            }
 
 
         });
-
-
-        function responseMessage(msg) {
-            alert(msg);
-        }
     </script>
 
 </body>

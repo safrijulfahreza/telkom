@@ -6,6 +6,33 @@ class Rating extends CI_Controller
     public function index($token)
     {
         $data['token'] = $token;
-        $this->load->view('rating/rating', $data);
+
+        $result = $this->db->get_where('penilaian', ['token' => $token])->row_array();
+
+        if ($result['rate'] == 0) {
+            $this->load->view('rating/rating', $data);
+        } else {
+            redirect('rating/terimakasih');
+        }
+    }
+
+    public function update()
+    {
+        $rate = $this->input->post('rate');
+        $keterangan = $this->input->post('ket');
+        $token = $this->input->post('token');
+        $data = [
+            'rate' => $rate,
+            'keterangan' => $keterangan
+        ];
+        $this->db->set($data);
+        $this->db->where('token', $token);
+        $this->db->update('penilaian');
+        redirect('rating/terimakasih');
+    }
+
+    public function terimakasih()
+    {
+        $this->load->view('rating/terimakasih');
     }
 }

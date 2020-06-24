@@ -12,4 +12,16 @@ class Teknisi_model extends CI_Model
 
         return $this->db->query($query)->result_array();
     }
+
+    public function getTask($name)
+    {
+        $query = "SELECT COUNT(teknisi1) AS helpdesk FROM input WHERE teknisi1 = '$name' OR teknisi2 = '$name'";
+        return $this->db->query($query)->row_array();
+    }
+
+    public function getClose($name)
+    {
+        $query = "SELECT COUNT(status) AS close FROM input WHERE status = 'CLOSE' AND teknisi1 = '$name' OR teknisi2 = '$name'";
+        return $this->db->query($query)->row_array();
+    }
 }

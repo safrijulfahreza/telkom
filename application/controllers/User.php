@@ -12,7 +12,19 @@ class User extends CI_Controller
     {
         $data['title'] = 'My Profile';
         $data['user'] = $this->db->get_where('user', ['nik' => $this->session->userdata('nik')])->row_array();
+        $name = $data['user']['name'];
 
+        if ($data['user']['role_id'] == 3) {
+            $this->load->model('Teknisi_model', 'laporan');
+            $data['laporanDit'] = $this->laporan->getTask($name);
+            $data['close'] = $this->laporan->getClose($name);
+            $data['total'] = $this->db->count_all_results('input');
+        } else {
+            $this->load->model('Table_model', 'laporan');
+            $data['laporanDit'] = $this->laporan->getLaporanDitangani($name);
+            $data['close'] = $this->laporan->getLaporanClose($name);
+            $data['total'] = $this->db->count_all_results('input');
+        }
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);

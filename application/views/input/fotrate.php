@@ -29,6 +29,17 @@
                     <button onclick="myFunction()" onmouseout="outFunc()" class="btn btn-secondary">
                         <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
                     </button>
+                    <div class="col-sm-10 mt-2">
+                        <span class="heading">Rating Konsumen</span>
+                        <?php for ($i = 0; $i < 5; $i++) : ?>
+                            <?php if ($i >= $penilaian['rate']) : ?>
+                                <?= '<span class="fa fa-star"></span>'; ?>
+                            <?php else : ?>
+                                <?= '<span class="fa fa-star" style="color: orange;" ></span>'; ?>
+                            <?php endif; ?>
+                        <?php endfor; ?>
+                    </div>
+
                 </div>
             </div>
 

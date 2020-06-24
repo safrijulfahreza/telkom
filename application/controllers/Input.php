@@ -186,4 +186,11 @@ class Input extends CI_Controller
         $this->load->view('input/fotrate', $data);
         $this->load->view('templates/footer');
     }
+
+    public function getData()
+    {
+        $this->load->model('Table_model', 'grafik');
+        $data = json_encode($this->grafik->dataGrafikStat());
+        echo $data;
+    }
 }

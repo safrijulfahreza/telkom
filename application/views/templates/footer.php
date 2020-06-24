@@ -48,8 +48,7 @@
 <!-- Core plugin JavaScript-->
 <script src="<?= base_url('assets/'); ?>vendor/jquery-easing/jquery.easing.min.js"></script>
 <!-- Chart script -->
-<script src="<?= base_url('assets/'); ?>vendor/chart.js/Chart.js"></script>
-<script src="<?= base_url('assets/'); ?>js/demo/chart-bar-demo.js"></script>
+
 <!-- Custom scripts for all pages-->
 <script src="<?= base_url('assets/'); ?>js/sb-admin-2.min.js"></script>
 
@@ -80,23 +79,6 @@
         });
     });
 
-    // function rating yang belum beres
-    // $(document).ready(function() {
-    //     var $inp = $('#rating-input');
-
-    //     //$inp.attr('value','4');
-
-    //     $inp.rating({
-    //         min: 0,
-    //         max: 5,
-    //         step: 1,
-    //         size: 'sm',
-    //         showClear: false
-    //     });
-    //     $inp.on('rating.change', function() {
-    //         alert('Nilai rating : ' + $('#rating-input').val());
-    //     });
-    // });
 
     function myFunction() {
         var copyText = document.getElementById("url");

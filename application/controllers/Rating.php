@@ -9,10 +9,14 @@ class Rating extends CI_Controller
 
         $result = $this->db->get_where('penilaian', ['token' => $token])->row_array();
 
-        if ($result['rate'] == 0) {
-            $this->load->view('rating/rating', $data);
+        if ($result > 0) {
+            if ($result['rate'] != 0) {
+                redirect('rating/terimakasih');
+            } else {
+                $this->load->view('rating/rating', $data);
+            }
         } else {
-            redirect('rating/terimakasih');
+            $this->load->view('rating/unvalid');
         }
     }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Jun 2020 pada 18.47
+-- Waktu pembuatan: 26 Jun 2020 pada 16.47
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.2.29
 
@@ -49,7 +49,13 @@ INSERT INTO `history` (`id`, `nomor`, `hd`, `status`, `waktu`) VALUES
 (7, 'MDN10938426', '1657301011', 'PENDING', '2020-06-13 12:40:48'),
 (8, 'JKL899823747', '1657301075', 'IN TECHNICIAN', '2020-06-13 12:43:22'),
 (9, 'JKL899823747', '1657301011', 'PENDING', '2020-06-13 12:43:47'),
-(10, 'JKL899823747', '1657301011', 'GAMAS', '2020-06-13 12:47:44');
+(10, 'JKL899823747', '1657301011', 'GAMAS', '2020-06-13 12:47:44'),
+(11, 'JKL899823747', '1657301011', 'CLOSE', '2020-06-23 06:30:58'),
+(12, 'MDN10938426', '1657301011', 'CLOSE', '2020-06-23 06:31:24'),
+(13, 'JKL899823747', '1657301075', 'PENDING', '2020-06-24 13:53:48'),
+(14, 'JKT46872834', '1657301075', 'PENDING', '2020-06-24 15:08:40'),
+(15, 'MTK82784732', '1657301075', 'PENDING', '2020-06-24 15:09:01'),
+(16, 'MDN10092847', '1657301075', 'PENDING', '2020-06-24 15:09:32');
 
 -- --------------------------------------------------------
 
@@ -71,15 +77,15 @@ CREATE TABLE `input` (
   `keterangan` varchar(130) NOT NULL,
   `tgl_input` timestamp NULL DEFAULT NULL,
   `tgl_update` timestamp NULL DEFAULT NULL,
-  `sleeve` int(11) DEFAULT NULL,
-  `adaptor` int(11) DEFAULT NULL,
-  `precon50` int(11) DEFAULT NULL,
-  `precon75` int(11) DEFAULT NULL,
-  `precon100` int(11) DEFAULT NULL,
-  `precon150` int(11) DEFAULT NULL,
-  `ps1:4` int(11) DEFAULT NULL,
-  `ps1:8` int(11) DEFAULT NULL,
-  `pigtail` int(11) DEFAULT NULL,
+  `sleeve` int(2) DEFAULT NULL,
+  `adaptor` int(2) DEFAULT NULL,
+  `precon50` int(2) DEFAULT NULL,
+  `precon75` int(2) DEFAULT NULL,
+  `precon100` int(2) DEFAULT NULL,
+  `precon150` int(2) DEFAULT NULL,
+  `ps1:4` int(2) DEFAULT NULL,
+  `ps1:8` int(2) DEFAULT NULL,
+  `pigtail` int(2) DEFAULT NULL,
   `image` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -89,14 +95,14 @@ CREATE TABLE `input` (
 
 INSERT INTO `input` (`nomor_tiket`, `status`, `layanan`, `segmen`, `teknisi1`, `teknisi2`, `helpdesk`, `sto`, `alpro`, `perbaikan`, `keterangan`, `tgl_input`, `tgl_update`, `sleeve`, `adaptor`, `precon50`, `precon75`, `precon100`, `precon150`, `ps1:4`, `ps1:8`, `pigtail`, `image`) VALUES
 ('ASL12345', 'GAMAS', 'VPN IP', 'DGS', 'Black Mamba', 'Saykoji', 'Safrijul Fahreza', 'DLT', 'FO', 'GAMAS BACKBONE', '', '2020-06-19 16:25:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'default.png'),
-('JKL899823747', 'GAMAS', 'METRO E', 'DBS', 'Saykoji', 'Black Mamba', 'Ahmad Sahnan', 'SKI', 'FO', 'KABEL ADAPTOR MODEM / ONT RUSAK', '', '2019-08-28 10:28:37', '2020-06-13 12:47:44', 5, 2, 2, 1, 1, 1, 2, 1, 1, 'default.png'),
+('JKL899823747', 'PENDING', 'METRO E', 'DBS', 'Saykoji', 'Black Mamba', 'Ahmad Sahnan', 'SKI', 'FO', 'KABEL ADAPTOR MODEM / ONT RUSAK', '', '2019-08-28 10:28:37', '2020-06-24 13:53:48', 5, 2, 2, 1, 1, 1, 2, 1, 1, 'default.png'),
 ('JKT18724739027', 'CLOSE', 'VPN IP', 'DGS', 'Saykoji', 'Test', 'Safrijul Fahreza', 'SKI', 'FO', 'KABEL ADAPTOR MODEM/ONT RUSAK', 'mhgcghcghg', '2019-08-24 19:22:41', '2020-02-15 16:35:53', 1, 3, 0, 5, 0, 0, 0, 0, 0, 'default.png'),
-('JKT46872834', 'CLOSE', 'METRO E', 'DGS', 'Test', 'Black Mamba', 'Black Mamba', 'TJR', 'FO', 'KONFIGURASI ULANG (CONFIG ULANG)', '', '2019-08-27 11:12:39', '2020-02-15 16:36:25', 2, 2, 0, 0, 0, 0, 0, 0, 0, 'default.png'),
+('JKT46872834', 'PENDING', 'METRO E', 'DGS', 'Test', 'Black Mamba', 'Ahmad Sahnan', 'TJR', 'FO', 'KONFIGURASI ULANG (CONFIG ULANG)', '', '2019-08-27 11:12:39', '2020-06-24 15:08:40', 2, 2, 0, 0, 0, 0, 0, 0, 0, 'default.png'),
 ('KJL773929', 'GAMAS', 'ASTINET', 'DES', 'Black Mamba', 'Ahmad Sahnan', 'Safrijul Fahreza', 'DLT', 'FO', 'PORT SPLITTER DI ODP', '', '2020-02-15 16:40:49', '2020-06-12 19:20:25', 0, 0, 0, 0, 0, 0, 0, 0, 0, 'default.png'),
 ('KL882981', 'IN TECHNICIAN', 'METRO E', 'DES', 'Black Mamba', 'Ahmad Sahnan', 'Safrijul Fahreza', 'SPM', 'FO', 'JUMPER MSAN / RK', '', '2020-06-17 18:07:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'default.png'),
-('MDN10092847', 'CLOSE', 'METRO E', 'DBS', 'Saykoji', 'Test', 'Polan', 'DLT', 'FO', 'CATUAN LISTRIK PELANGGAN BERMASALAH', 'hggaghavas', '2019-08-24 18:49:58', '2020-06-11 02:37:31', 3, 6, 3, 6, 4, 2, 5, 2, 6, 'default.png'),
-('MDN10938426', 'PENDING', 'VPN IP', 'DES', 'Black Mamba', 'Saykoji', 'Safrijul Fahreza', 'SPM', 'COOPER', 'BAIK SENDIRI / CALL OK', 'vgjckjgkgjvj', '2019-08-24 19:19:53', '2020-06-14 17:51:20', 1, 0, 0, 0, 0, 0, 0, 0, 0, 'perbaikan.jpg'),
-('MTK82784732', 'CLOSE', 'VPN IP', 'DGS', 'Saykoji', 'Black Mamba', 'Safrijul Fahreza', 'DLT', 'COOPER', 'KABEL DROP CORE PUTUS', 'Rusak', '2019-08-25 08:23:54', '2020-02-15 16:36:16', 1, 0, 0, 0, 0, 0, 0, 10, 6, 'default.png'),
+('MDN10092847', 'PENDING', 'METRO E', 'DBS', 'Saykoji', 'Test', 'Polan', 'DLT', 'FO', 'CATUAN LISTRIK PELANGGAN BERMASALAH', 'hggaghavas', '2019-08-24 18:49:58', '2020-06-24 15:09:32', 3, 6, 3, 6, 4, 2, 5, 2, 6, 'default.png'),
+('MDN10938426', 'CLOSE', 'VPN IP', 'DES', 'Black Mamba', 'Saykoji', 'Safrijul Fahreza', 'SPM', 'COOPER', 'BAIK SENDIRI / CALL OK', 'vgjckjgkgjvj', '2019-08-24 19:19:53', '2020-06-23 06:31:24', 1, 0, 0, 0, 0, 0, 0, 0, 0, 'perbaikan.jpg'),
+('MTK82784732', 'PENDING', 'VPN IP', 'DGS', 'Saykoji', 'Black Mamba', 'Safrijul Fahreza', 'DLT', 'COOPER', 'KABEL DROP CORE PUTUS', 'Rusak', '2019-08-25 08:23:54', '2020-06-24 15:09:01', 1, 0, 0, 0, 0, 0, 0, 10, 6, 'default.png'),
 ('NJM124572', 'IN TECHNICIAN', 'METRO E', 'DGS', 'Saykoji', 'Ahmad Sahnan', 'Safrijul Fahreza', 'GLG', 'FO', 'GAMAS BACKBONE', 'Testing aja', '2019-08-24 17:00:00', '2020-06-18 15:36:38', 3, 2, 2, 3, 4, 3, 1, 5, 7, 'default.png');
 
 -- --------------------------------------------------------
@@ -106,7 +112,7 @@ INSERT INTO `input` (`nomor_tiket`, `status`, `layanan`, `segmen`, `teknisi1`, `
 --
 
 CREATE TABLE `penilaian` (
-  `id` int(100) NOT NULL,
+  `id` int(11) NOT NULL,
   `nomor_tiket` varchar(100) NOT NULL,
   `token` varchar(128) NOT NULL,
   `rate` int(1) NOT NULL,
@@ -118,9 +124,9 @@ CREATE TABLE `penilaian` (
 --
 
 INSERT INTO `penilaian` (`id`, `nomor_tiket`, `token`, `rate`, `keterangan`) VALUES
-(1, 'NJM124572', 'b0fa484077691a0913fa8d5dfdec07fd', 0, ''),
+(1, 'NJM124572', 'b0fa484077691a0913fa8d5dfdec07fd', 1, 'bagus'),
 (2, 'MDN10092847', '6bb320e11bcfd40d72a8f6f967c7558e', 0, ''),
-(3, 'MDN10938426', '8e04baa00b1ef675a6b87dd43bd23017', 0, ''),
+(3, 'MDN10938426', '8e04baa00b1ef675a6b87dd43bd23017', 4, 'test'),
 (4, 'JKT18724739027', '3bb5a3141c3c12cef007be8209273083', 0, ''),
 (5, 'MTK82784732', '75d5c465ba98d45330e302af6899f297', 0, ''),
 (6, 'JKT46872834', 'be707e60d0bf603378e49f4902099405', 0, ''),
@@ -194,7 +200,7 @@ INSERT INTO `perbaikan` (`id`, `subsegmen`) VALUES
 
 CREATE TABLE `sto` (
   `id` int(11) NOT NULL,
-  `pilihan` varchar(5) NOT NULL
+  `pilihan` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -281,7 +287,6 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (10, 2, 6),
 (11, 1, 6),
 (15, 3, 2),
-(17, 1, 7),
 (18, 3, 7);
 
 -- --------------------------------------------------------
@@ -348,7 +353,7 @@ CREATE TABLE `user_sub_menu` (
 
 INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active`) VALUES
 (1, 1, 'Dashboard', 'admin', 'fas fa-fw fa-tachometer-alt', 0),
-(2, 2, 'My Profile', 'user', 'fas fa-fw fa-user', 1),
+(2, 2, 'Profile', 'user', 'fas fa-fw fa-user', 1),
 (3, 2, 'Edit Profile', 'user/edit', 'fas fa-fw fa-user-edit', 1),
 (4, 3, 'Menu Management', 'menu', 'fas fa-fw fa-folder', 1),
 (5, 3, 'Submenu Management', 'menu/submenu', 'fas fa-fw fa-folder-open', 1),
@@ -435,13 +440,13 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT untuk tabel `history`
 --
 ALTER TABLE `history`
-  MODIFY `id` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `penilaian`
 --
 ALTER TABLE `penilaian`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `perbaikan`

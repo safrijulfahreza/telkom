@@ -10,7 +10,7 @@ class User extends CI_Controller
     }
     public function index()
     {
-        $data['title'] = 'My Profile';
+        $data['title'] = 'Profile';
         $data['user'] = $this->db->get_where('user', ['nik' => $this->session->userdata('nik')])->row_array();
         $name = $data['user']['name'];
 

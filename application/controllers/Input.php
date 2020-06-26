@@ -151,6 +151,7 @@ class Input extends CI_Controller
         $data['title'] = 'Grafik';
         $data['user'] = $this->db->get_where('user', ['nik' => $this->session->userdata('nik')])->row_array();
         $data['input'] = $this->db->get('input')->result_array();
+        $data['total'] = $this->db->count_all_results('input');
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);

@@ -15,6 +15,7 @@
                 <canvas id="myChart"></canvas>
             </div>
             <hr>
+            Total Gangguan = <?= $total; ?>
         </div>
     </div>
 

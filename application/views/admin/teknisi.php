@@ -24,7 +24,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Nama Teknisi</th>
                                     <th scope="col">NIK</th>
-                                    <th scope="col">Gangguan</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>

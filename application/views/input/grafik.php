@@ -68,7 +68,7 @@
                                 ticks: {
                                     maxTicksLimit: 6
                                 },
-                                maxBarThickness: 25,
+                                maxBarThickness: 50,
                             }],
                             yAxes: [{
                                 ticks: {

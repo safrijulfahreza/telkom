@@ -39,7 +39,7 @@
                     data: {
                         labels: data_status,
                         datasets: [{
-                            label: "Revenue",
+                            label: "Total",
                             backgroundColor: "#df4e4e",
                             hoverBackgroundColor: "#d92e2e",
                             borderColor: "#df4e4e",

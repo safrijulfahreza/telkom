@@ -31,7 +31,7 @@
 
                 <div class="form-group row justify-content-end">
                     <div class="col-sm-10">
-                        <button type="button" onclick="checkBut()" class="btn btn-success">Edit</button>
+                        <button type="button" onclick="checkBut()" class="btn btn-success">Submit</button>
                     </div>
                     <script>
                         function checkBut() {

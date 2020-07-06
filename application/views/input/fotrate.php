@@ -38,6 +38,7 @@
                                 <?= '<span class="fa fa-star" style="color: orange;" ></span>'; ?>
                             <?php endif; ?>
                         <?php endfor; ?>
+                        <textarea class="form-control" readonly value=""><?= $penilaian['keterangan']; ?></textarea>
                     </div>
 
                 </div>

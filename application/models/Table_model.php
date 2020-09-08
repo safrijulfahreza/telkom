@@ -5,7 +5,7 @@ class Table_model extends CI_Model
 {
     public function getLaporanASC()
     {
-        $query = "SELECT * FROM `input` ORDER BY tgl_input ASC";
+        $query = "SELECT input.*, user.name FROM input JOIN user ON input.id_pel = user.id ORDER BY tgl_input ASC";
 
         return $this->db->query($query)->result_array();
     }
@@ -26,5 +26,13 @@ class Table_model extends CI_Model
     {
         $query = "SELECT status, COUNT(*) AS total FROM input GROUP BY status";
         return $this->db->query($query)->result();
+    }
+
+    public function getVal($id)
+    {
+        $query = "SELECT input.nomor_tiket, input.perbaikan, input.tgl_update ,input.status, input.image, input.id_pel, penilaian.rate, penilaian.keterangan 
+                    FROM input JOIN penilaian ON input.nomor_tiket = penilaian.nomor_tiket 
+                    WHERE input.id_pel = $id AND penilaian.rate = 0 AND input.status = 'CLOSE'";
+        return $this->db->query($query)->row_array();
     }
 }

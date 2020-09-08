@@ -158,8 +158,10 @@ class Admin extends CI_Controller
         $data['title'] = 'Registrasi User';
         $data['user'] = $this->db->get_where('user', ['nik' => $this->session->userdata('nik')])->row_array();
 
-        $data['regis'] = $this->db->get('user')->result_array();
-        $data['role_name'] = $this->db->get('user_role')->result_array();
+        $this->load->model('User_model', 'user');
+        $data['regis'] = $this->user->getUser();
+        $this->load->model('Role_model', 'role');
+        $data['role_name'] = $this->role->getRole();
 
         $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('nik', 'Nik', 'required|is_unique[user.nik]');
@@ -211,5 +213,19 @@ class Admin extends CI_Controller
         $this->db->update('user');
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data di update!</div>');
         redirect('admin/registrasi');
+    }
+
+    public function pelanggan()
+    {
+        $data['title'] = 'Pelanggan';
+        $data['user'] = $this->db->get_where('user', ['nik' => $this->session->userdata('nik')])->row_array();
+        $this->load->model('User_model', 'user');
+        $data['pelanggan'] = $this->user->getPelanggan();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/pelanggan', $data);
+        $this->load->view('templates/footer');
     }
 }

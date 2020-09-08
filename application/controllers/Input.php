@@ -18,6 +18,8 @@ class Input extends CI_Controller
         $data['teknisi'] = $this->teknisi->getTeknisi();
         $data['perbaikan'] = $this->db->get('perbaikan')->result_array();
         $data['sto'] = $this->db->get('sto')->result_array();
+        $this->load->model('User_model', 'pelanggan');
+        $data['pelanggan'] = $this->pelanggan->getPelanggan();
 
 
         $this->form_validation->set_rules('nomor', 'Nomor Tiket', 'required|is_unique[input.nomor_tiket]', [
@@ -50,7 +52,8 @@ class Input extends CI_Controller
                 'alpro' => $this->input->post('alpro'),
                 'perbaikan' => $this->input->post('subsegmen'),
                 'keterangan' => $this->input->post('keterangan'),
-                'image' => 'default.png'
+                'image' => 'default.png',
+                'id_pel' => $this->input->post('pelanggan')
             ];
             $data2 = [
                 'nomor_tiket' => $this->input->post('nomor'),

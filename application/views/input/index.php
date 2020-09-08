@@ -93,6 +93,15 @@
                     </select>
                 </div>
                 <div class="mt-2">
+                    <label for="">Pelanggan</label>
+                    <select class="custom-select my-0 mr-sm-2" id="pelanggan" name="pelanggan">
+                        <option selected value="">Pilih</option>
+                        <?php foreach ($pelanggan as $pg) : ?>
+                            <option value="<?= $pg['id']; ?>"><?= $pg['name']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="mt-2">
                     <label for="">Keterangan</label>
                     <textarea class="form-control" id="keterangan" name="keterangan" rows="3"></textarea>
                 </div>

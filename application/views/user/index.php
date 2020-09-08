@@ -26,22 +26,25 @@
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card mb-3" style="max-width: 540ox;">
-                <div class="card-body">
-                    <h5 class="card-title text-center font-weight-bolder">Jumlah Gangguan Dengan Status Close</h5>
-                    <h3 class="card-text text-center"><?= $close['close']; ?> Dari <?= $laporanDit['helpdesk']; ?> Gangguan</h3>
+        <?php if ($user['role_id'] != 4) : ?>
+            <div class="col">
+                <div class="card mb-3" style="max-width: 540ox;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center font-weight-bolder">Jumlah Gangguan Dengan Status Close</h5>
+                        <h3 class="card-text text-center"><?= $close['close']; ?> Dari <?= $laporanDit['helpdesk']; ?> Gangguan</h3>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="card mb-3" style="max-width: 540ox;">
-                <div class="card-body">
-                    <h5 class="card-title text-center font-weight-bolder">Jumlah Seluruh Gangguan</h5>
-                    <h3 class="card-text text-center"><?= $total; ?></h3>
+            <div class="col">
+                <div class="card mb-3" style="max-width: 540ox;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center font-weight-bolder">Jumlah Seluruh Gangguan</h5>
+                        <h3 class="card-text text-center"><?= $total; ?></h3>
+                    </div>
                 </div>
             </div>
-        </div>
+        <?php else : ?>
+        <?php endif; ?>
     </div>
 
 </div>

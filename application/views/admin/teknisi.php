@@ -52,30 +52,3 @@
 <!-- /.container-fluid -->
 
 </div>
-<!-- End of Main Content -->
-<div class="modal fade" id="tambahTeknisi" tabindex="-1" role="dialog" aria-labelledby="tambahTeknisiLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="tambahTeknisiLabel">Tambah Teknisi</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="<?= base_url('admin/teknisi'); ?>" method="post">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Nama Teknisi">
-                    </div>
-                    <div class="form-group">
-                        <input type="number" class="form-control" id="nik" name="nik" placeholder="NIK">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>

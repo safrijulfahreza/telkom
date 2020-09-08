@@ -37,7 +37,6 @@
                             <tbody>
                                 <?php $i = 1; ?>
                                 <?php foreach ($input as $in) : ?>
-
                                     <tr>
                                         <th scope="row"><?= $i; ?></th>
                                         <td><?= $in['nomor_tiket'] ?></td>
@@ -97,6 +96,7 @@ foreach ($input as $i) :
     $ps1_4 = $i['ps1:4'];
     $ps1_8 = $i['ps1:8'];
     $pigtail = $i['pigtail'];
+    $pelanggan = $i['name'];
 ?>
     <div class="modal fade" id="detail<?php echo $nomor_tiket; ?>" tabindex="-1" role="dialog" aria-labelledby="detailLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -112,6 +112,12 @@ foreach ($input as $i) :
                             <label class="control-label col-xs-3">Nomor Tiket</label>
                             <div class="col-xs-8">
                                 <input name="nomor" id="nomor" value="<?php echo $nomor_tiket; ?>" class="form-control" type="text" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3">Pelanggan</label>
+                            <div class="col-xs-8">
+                                <input name="pelanggan" id="pelanggan" value="<?php echo $pelanggan; ?>" class="form-control" type="text" readonly>
                             </div>
                         </div>
 

@@ -16,8 +16,6 @@ class Validasi extends CI_Controller
 
 
         $data['gangguan'] = $this->data->getVal($data['user']['id']);
-        // var_dump($data['gangguan']);
-        // die;
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);

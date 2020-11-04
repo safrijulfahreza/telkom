@@ -90,7 +90,7 @@ class Admin extends CI_Controller
 
     public function teknisi()
     {
-        $data['title'] = 'Testing';
+        $data['title'] = 'Teknisi';
         $data['user'] = $this->db->get_where('user', ['nik' => $this->session->userdata('nik')])->row_array();
         $this->load->model('Teknisi_model', 'teknisi');
         $data['teknisi'] = $this->teknisi->getTeknisi();
